@@ -1,6 +1,8 @@
 package com.kunlun.api.service;
 
+import com.kunlun.result.DataRet;
 import com.kunlun.result.PageResult;
+import com.kunlun.wxentity.OrderCondition;
 
 /**
  * @author by kunlun
@@ -25,4 +27,12 @@ public interface OrderService {
                     String searchKey,
                     Integer pageNo,
                     Integer pageSize);
+
+    /**
+     * 发货
+     *
+     * @param orderCondition
+     * @return
+     */
+    DataRet<String> sendGood(OrderCondition orderCondition);
 }

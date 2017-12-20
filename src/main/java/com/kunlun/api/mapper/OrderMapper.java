@@ -28,4 +28,16 @@ public interface OrderMapper {
                      @Param("status") String status,
                      @Param("type") String type,
                      @Param("searchKey") String searchKey);
+
+    /**
+     * 根据id查询订单
+     *
+     * @param orderId
+     * @param sellerId
+     * @param status
+     * @return
+     */
+    Order findByOrderIdAndSellerId(@Param("orderId") Long orderId,
+                                   @Param("sellerId") Long sellerId,
+                                   @Param("status") String status);
 }
