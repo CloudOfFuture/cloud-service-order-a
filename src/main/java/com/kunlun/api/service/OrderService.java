@@ -1,5 +1,6 @@
 package com.kunlun.api.service;
 
+import com.kunlun.entity.Order;
 import com.kunlun.result.DataRet;
 import com.kunlun.result.PageResult;
 import com.kunlun.wxentity.OrderCondition;
@@ -35,4 +36,12 @@ public interface OrderService {
      * @return
      */
     DataRet<String> sendGood(OrderCondition orderCondition);
+
+    /**
+     * 修改订单
+     *
+     * @param order
+     * @return
+     */
+    DataRet<String> modify(Order order);
 }

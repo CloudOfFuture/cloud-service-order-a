@@ -2,6 +2,7 @@ package com.kunlun.api.service;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.kunlun.api.mapper.LogisticMapper;
 import com.kunlun.api.mapper.OrderMapper;
 import com.kunlun.entity.Logistics;
 import com.kunlun.entity.Order;
@@ -24,6 +25,8 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     private OrderMapper orderMapper;
 
+    @Autowired
+    private LogisticMapper logisticMapper;
 
     /**
      * @param orderNo   订单号
@@ -64,7 +67,6 @@ public class OrderServiceImpl implements OrderService {
         if (StringUtils.isNullOrEmpty(orderCondition.getLogisticName())) {
             return new DataRet<>("ERROR", "快递公司不能为空");
         }
-        //TODO   发件人ID  应该为店铺ID
         /**
          * 根据 订单id、店铺id、订单状态为待发货查询订单
          */
@@ -73,9 +75,39 @@ public class OrderServiceImpl implements OrderService {
         if (null == order) {
             return new DataRet<>("ERROR", "订单不存在");
         }
+        Logistics logistics = this.logistics(orderCondition);
+        logisticMapper.add(logistics);
+        //TODO  调用日志服务  暂时未写
+
+        orderMapper.updateOrderStatus(orderId,
+                CommonEnum.UN_RECEIVE.getCode(),
+                logistics.getLogisticNo(), logistics.getId());
 
 
-        return null;
+        return new DataRet<>("发货成功");
+    }
+
+    /**
+     * 修改订单
+     *
+     * @param order
+     * @return
+     */
+    @Override
+    public DataRet<String> modify(Order order) {
+        Order result = orderMapper.findByOrderIdAndSellerId(order.getId(), order.getSellerId(),
+                CommonEnum.UN_DELIVERY.getCode());
+        if (null == result) {
+            return new DataRet<>("ERROR", "订单不存在");
+        }
+        orderMapper.modify(order.getId(),
+                order.getProvince(),
+                order.getCity(),
+                order.getArea(),
+                order.getAddress(),
+                order.getRemark(),
+                order.getPhone());
+        return new DataRet<>("订单修改成功");
     }
 
 

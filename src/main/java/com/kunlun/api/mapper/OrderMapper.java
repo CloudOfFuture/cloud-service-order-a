@@ -40,4 +40,39 @@ public interface OrderMapper {
     Order findByOrderIdAndSellerId(@Param("orderId") Long orderId,
                                    @Param("sellerId") Long sellerId,
                                    @Param("status") String status);
+
+    /**
+     * 根据订单id更新订单状态 以及发货信息
+     *
+     * @param orderId
+     * @param status
+     * @param logisticId
+     * @param logisticNo
+     * @return
+     */
+    int updateOrderStatus(@Param("orderId") Long orderId,
+                          @Param("status") String status,
+                          @Param("logisticNo") String logisticNo,
+                          @Param("logisticId") Long logisticId);
+
+    /**
+     * 修改订单
+     *
+     * @param orderId
+     * @param province
+     * @param city
+     * @param area
+     * @param address
+     * @param remark
+     * @param phone
+     * @return
+     */
+
+    int modify(@Param("orderId") Long orderId,
+               @Param("province") String province,
+               @Param("city") String city,
+               @Param("area") String area,
+               @Param("address") String address,
+               @Param("remark") String remark,
+               @Param("phone") String phone);
 }

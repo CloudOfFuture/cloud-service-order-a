@@ -7,4 +7,14 @@
     <select id="list" resultType="com.kunlun.entity.Order">
         SELECT * FROM t_order
     </select>
+
+    <update id="modify">
+        UPDATE t_order SET province=#{province},
+        city=#{city},
+        area=#{area},
+        address=#{address},
+        remark=#{remark},
+        phone=#{phone}
+        WHERE id=#{orderId}
+    </update>
 </mapper>
