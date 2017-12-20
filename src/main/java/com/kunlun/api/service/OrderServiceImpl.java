@@ -142,7 +142,14 @@ public class OrderServiceImpl implements OrderService {
         if (order == null) {
             return new DataRet<>("ERROR", "订单不存在");
         }
-        orderMapper.auditRefund(orderId, flag, remark, refundFee, sellerId);
+        if(CommonEnum.REFUSE.getCode().equals(flag)){
+            orderMapper.auditRefund(orderId,CommonEnum.REFUSE.getCode(),remark,0,sellerId);
+        }else {
+            orderMapper.auditRefund(orderId, flag, remark, refundFee, sellerId);
+
+
+        }
+        //TODO 生成退款日志
         return new DataRet<>("审核成功");
     }
 
