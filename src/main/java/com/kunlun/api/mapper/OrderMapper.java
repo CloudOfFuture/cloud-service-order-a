@@ -3,6 +3,7 @@ package com.kunlun.api.mapper;
 import com.github.pagehelper.Page;
 import com.kunlun.entity.Order;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * @author by kunlun
@@ -12,5 +13,19 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface OrderMapper {
 
-    Page<Order> list();
+    /**
+     * 订单列表
+     *
+     * @param orderNo
+     * @param phone
+     * @param status
+     * @param type
+     * @param searchKey
+     * @return
+     */
+    Page<Order> list(@Param("orderNo") String orderNo,
+                     @Param("phone") String phone,
+                     @Param("status") String status,
+                     @Param("type") String type,
+                     @Param("searchKey") String searchKey);
 }

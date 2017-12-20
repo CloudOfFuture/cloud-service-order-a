@@ -14,14 +14,20 @@ import org.springframework.web.bind.annotation.RestController;
  * @created on 2017/12/20.
  */
 @RestController
-@RequestMapping("/base/order")
+@RequestMapping("/backend/order")
 public class OrderController {
 
     @Autowired
     private OrderService orderService;
 
-    @GetMapping("/list/{pageNo}/{pageSize}")
-    public PageResult list(@RequestParam(value = "pageNo") Integer pageNo, @RequestParam(value = "pageSize") Integer pageSize) {
-        return orderService.list(pageNo, pageSize);
+    @GetMapping("/list")
+    public PageResult list(@RequestParam(value = "order_no") String orderNo,
+                           @RequestParam(value = "phone") String phone,
+                           @RequestParam(value = "status") String status,
+                           @RequestParam(value = "type") String type,
+                           @RequestParam(value = "search_key") String searchKey,
+                           @RequestParam(value = "page_no") Integer pageNo,
+                           @RequestParam(value = "page_size") Integer pageSize) {
+        return orderService.list(orderNo, phone, status, type, searchKey, pageNo, pageSize);
     }
 }

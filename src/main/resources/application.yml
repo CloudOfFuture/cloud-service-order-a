@@ -1,6 +1,5 @@
 server:
   port: 6001
-  context-path: /api/
 spring:
   application:
     name: cloud-service-order
