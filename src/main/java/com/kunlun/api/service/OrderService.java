@@ -60,7 +60,8 @@ public interface OrderService {
      * @param flag      AGREE同意  REFUSE  拒绝
      * @param remark    退款备注
      * @param refundFee 退款金额
+     * @param sellerId  商家id
      * @return
      */
-    DataRet<String> auditRefund(Long orderId, String flag, String remark, Integer refundFee,);
+    DataRet<String> auditRefund(Long orderId, String flag, String remark, Integer refundFee, Long sellerId);
 }

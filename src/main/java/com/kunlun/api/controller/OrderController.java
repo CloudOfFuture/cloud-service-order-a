@@ -88,7 +88,7 @@ public class OrderController {
                                        @RequestParam(value = "remark") String remark,
                                        @RequestParam(value = "refund_fee") Integer refundFee,
                                        @RequestHeader(value = "seller_id") Long sellerId) {
-        return null;
+        return orderService.auditRefund(orderId, flag, remark, refundFee, sellerId);
     }
 
 }

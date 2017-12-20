@@ -130,15 +130,20 @@ public class OrderServiceImpl implements OrderService {
      * 退款审核
      *
      * @param orderId   订单id
-     * @param flag      AGREE同意  REFUSE拒绝
+     * @param flag      AGREE同意  REFUSE  拒绝
      * @param remark    退款备注
      * @param refundFee 退款金额
+     * @param sellerId  商家id
      * @return
      */
     @Override
-    public DataRet<String> auditRefund(Long orderId, String flag, String remark, Integer refundFee) {
-
-        return null;
+    public DataRet<String> auditRefund(Long orderId, String flag, String remark, Integer refundFee, Long sellerId) {
+        Order order = orderMapper.findByOrderIdAndSellerId(orderId, sellerId, null);
+        if (order == null) {
+            return new DataRet<>("ERROR", "订单不存在");
+        }
+        orderMapper.auditRefund(orderId, flag, remark, refundFee, sellerId);
+        return new DataRet<>("审核成功");
     }
 
 

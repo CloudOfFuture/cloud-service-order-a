@@ -107,4 +107,8 @@
             AND tor.order_status=#{status}
         </if>
     </select>
+
+    <update id="auditRefund">
+        UPDATE t_order SET flag=#{flag},remark=#{remark},refund_fee=#{refundFee} WHERE id=#{orderId} AND seller_id=#{sellerId}
+    </update>
 </mapper>
