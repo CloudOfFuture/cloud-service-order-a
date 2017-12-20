@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -55,8 +56,39 @@ public class OrderController {
      */
     @PostMapping("/modify")
     public DataRet<String> modify(@RequestBody Order order) {
-        return null;
+        return orderService.modify(order);
     }
 
+    /**
+     * 订单详情
+     *
+     * @param orderId
+     * @param sellerId
+     * @return
+     */
+    @GetMapping("/findById")
+    public DataRet<Order> findById(@RequestParam(value = "order_id") Long orderId,
+                                   @RequestHeader Long sellerId) {
+        return orderService.findById(orderId, sellerId);
+    }
+
+    /**
+     * 退款审核
+     *
+     * @param orderId   订单id
+     * @param flag      AGREE同意 REFUSE 拒绝
+     * @param remark    退款备注
+     * @param refundFee 退款金额
+     * @param sellerId  商家id
+     * @return
+     */
+    @GetMapping("/audit/refund")
+    public DataRet<String> auditRefund(@RequestParam(value = "order_id") Long orderId,
+                                       @RequestParam(value = "flag") String flag,
+                                       @RequestParam(value = "remark") String remark,
+                                       @RequestParam(value = "refund_fee") Integer refundFee,
+                                       @RequestHeader(value = "seller_id") Long sellerId) {
+        return null;
+    }
 
 }

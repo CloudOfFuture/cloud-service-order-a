@@ -110,6 +110,37 @@ public class OrderServiceImpl implements OrderService {
         return new DataRet<>("订单修改成功");
     }
 
+    /**
+     * 订单详情
+     *
+     * @param orderId
+     * @param sellerId
+     * @return
+     */
+    @Override
+    public DataRet<Order> findById(Long orderId, Long sellerId) {
+        Order order = orderMapper.findByOrderIdAndSellerId(orderId, sellerId, null);
+        if (null == order) {
+            return new DataRet<>("ERROR", "订单不存在");
+        }
+        return new DataRet<>(order);
+    }
+
+    /**
+     * 退款审核
+     *
+     * @param orderId   订单id
+     * @param flag      AGREE同意  REFUSE拒绝
+     * @param remark    退款备注
+     * @param refundFee 退款金额
+     * @return
+     */
+    @Override
+    public DataRet<String> auditRefund(Long orderId, String flag, String remark, Integer refundFee) {
+
+        return null;
+    }
+
 
     private Logistics logistics(OrderCondition orderCondition) {
         Logistics logistics = new Logistics();
