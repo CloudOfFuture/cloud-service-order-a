@@ -3,6 +3,7 @@ package com.kunlun.api.service;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.kunlun.api.mapper.WxOrderMapper;
+import com.kunlun.entity.Order;
 import com.kunlun.entity.OrderExt;
 import com.kunlun.result.DataRet;
 import com.kunlun.result.PageResult;
@@ -24,36 +25,24 @@ public class WxOrderServiceImpl implements WxOrderService {
     private WxOrderMapper wxOrderMapper;
 
     /**
-     * 查询订单列表
-     *
-     * @param orderCondition
-     * @return
-     */
-//    @Override
-//    public PageResult findByCondition(OrderCondition orderCondition) {
-//        if (null == orderCondition || StringUtils.isNullOrEmpty(orderCondition.getWxCode())) {
-//            return new PageResult("ERROR", "参数错误");
-//        }
-//        String openId = WxUtil.getOpenId(orderCondition.getWxCode());
-//        PageHelper.startPage(orderCondition.getPageNo(), orderCondition.getPageSize());
-//        Page<OrderExt> page = wxOrderMapper.findByCondition(openId, orderCondition.getStatus());
-//        return new PageResult(page);
-//    }
-
-    /**
      * 订单列表
      *
-     * @param pageNo   当前页
-     * @param pageSize 每页条数
-     * @param wxCode   微信code
-     * @param status   订单状态
+     * @param pageNo
+     * @param pageSize
+     * @param wxCode
+     * @param orderStatus
+     * @param payType
      * @return
      */
     @Override
-    public PageResult findByOpenid(Integer pageNo, Integer pageSize, String wxCode, String status) {
-
-
-        return null;
+    public PageResult findByOpenid(Integer pageNo, Integer pageSize, String wxCode, String orderStatus, String payType) {
+//        String userId = WxUtil.getOpenId(wxCode);
+        PageHelper.startPage(pageNo, pageSize);
+        if (StringUtils.isNullOrEmpty(wxCode)) {
+            return new PageResult();
+        }
+        Page<Order> page = wxOrderMapper.findByOpenid(wxCode, orderStatus, payType);
+        return new PageResult(page);
     }
 
     @Override

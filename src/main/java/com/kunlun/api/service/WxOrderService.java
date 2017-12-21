@@ -15,16 +15,14 @@ public interface WxOrderService {
     /**
      * 订单列表
      *
-     * @param pageNo   当前页
-     * @param pageSize 每页条数
-     * @param wxCode   微信code
-     * @param status   订单状态
+     * @param pageNo
+     * @param pageSize
+     * @param wxCode
+     * @param orderStatus
+     * @param payType
      * @return
      */
-    PageResult findByOpenid(Integer pageNo,
-                            Integer pageSize,
-                            String wxCode,
-                            String status);
+    PageResult findByOpenid(Integer pageNo, Integer pageSize, String wxCode, String orderStatus, String payType);
 
     /**
      * 退款

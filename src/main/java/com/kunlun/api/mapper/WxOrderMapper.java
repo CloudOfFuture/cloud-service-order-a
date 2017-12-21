@@ -1,6 +1,7 @@
 package com.kunlun.api.mapper;
 
 import com.github.pagehelper.Page;
+import com.kunlun.entity.Order;
 import com.kunlun.entity.OrderExt;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -13,5 +14,15 @@ import org.apache.ibatis.annotations.Param;
 @Mapper
 public interface WxOrderMapper {
 
-    Page<OrderExt> findByCondition(@Param("userId") String userId, @Param("status") String status);
+    /**
+     * 订单列表
+     *
+     * @param userId
+     * @param orderStatus
+     * @param payType
+     * @return
+     */
+    Page<Order> findByOpenid(@Param("userId") String userId,
+                             @Param("orderStatus") String orderStatus,
+                             @Param("payType") String payType);
 }

@@ -1,10 +1,11 @@
 package com.kunlun.api.controller;
 
+import com.kunlun.api.service.WxOrderService;
 import com.kunlun.entity.Estimate;
 import com.kunlun.entity.OrderExt;
 import com.kunlun.result.DataRet;
 import com.kunlun.result.PageResult;
-import com.kunlun.wxentity.OrderCondition;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,22 +22,25 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/wx/order")
 public class WxOrderController {
 
+    @Autowired
+    private WxOrderService wxOrderService;
 
     /**
      * 订单列表
      *
-     * @param pageNo   当前页
-     * @param pageSize 每页条数
-     * @param wxCode   微信code
-     * @param status   订单状态
+     * @param pageNo      当前页
+     * @param pageSize    每页条数
+     * @param wxCode      微信code
+     * @param orderStatus 订单状态
      * @return
      */
     @GetMapping("/findByOpenid")
     public PageResult findByOpenid(@RequestParam(value = "page_no") Integer pageNo,
                                    @RequestParam(value = "page_size") Integer pageSize,
                                    @RequestParam(value = "wx_code") String wxCode,
-                                   @RequestParam(value = "status") String status) {
-        return null;
+                                   @RequestParam(value = "order_status", required = false) String orderStatus,
+                                   @RequestParam(value = "pay_type", required = false) String payType) {
+        return wxOrderService.findByOpenid(pageNo, pageSize, wxCode, orderStatus, payType);
     }
 
     /**
@@ -47,7 +51,8 @@ public class WxOrderController {
      * @return
      */
     @PostMapping("/refund")
-    public DataRet<String> refund(@RequestParam(value = "order_id") Long orderId, @RequestParam(value = "wx_code") String wxCode) {
+    public DataRet<String> refund(@RequestParam(value = "order_id") Long orderId,
+                                  @RequestParam(value = "wx_code") String wxCode) {
         return null;
     }
 

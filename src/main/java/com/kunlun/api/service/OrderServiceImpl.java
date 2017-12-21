@@ -2,7 +2,6 @@ package com.kunlun.api.service;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
-import com.kunlun.api.mapper.LogisticMapper;
 import com.kunlun.api.mapper.OrderMapper;
 import com.kunlun.entity.Logistics;
 import com.kunlun.entity.Order;
@@ -24,9 +23,6 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     private OrderMapper orderMapper;
-
-    @Autowired
-    private LogisticMapper logisticMapper;
 
     /**
      * @param orderNo   订单号
@@ -76,7 +72,7 @@ public class OrderServiceImpl implements OrderService {
             return new DataRet<>("ERROR", "订单不存在");
         }
         Logistics logistics = this.logistics(orderCondition);
-        logisticMapper.add(logistics);
+        //TODO 配送信息
         //TODO  调用日志服务  暂时未写
 
         orderMapper.updateOrderStatus(orderId,
@@ -142,9 +138,9 @@ public class OrderServiceImpl implements OrderService {
         if (order == null) {
             return new DataRet<>("ERROR", "订单不存在");
         }
-        if(CommonEnum.REFUSE.getCode().equals(flag)){
-            orderMapper.auditRefund(orderId,CommonEnum.REFUSE.getCode(),remark,0,sellerId);
-        }else {
+        if (CommonEnum.REFUSE.getCode().equals(flag)) {
+            orderMapper.auditRefund(orderId, CommonEnum.REFUSE.getCode(), remark, 0, sellerId);
+        } else {
             orderMapper.auditRefund(orderId, flag, remark, refundFee, sellerId);
 
 
