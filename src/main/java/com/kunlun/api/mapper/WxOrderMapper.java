@@ -33,4 +33,12 @@ public interface WxOrderMapper {
      * @return
      */
     OrderExt findById(Long orderId);
+
+    /**
+     * 申请退款
+     *
+     * @param orderId
+     * @return
+     */
+    int refund(@Param("orderId") Long orderId, @Param("refundFee") Integer refundFee);
 }

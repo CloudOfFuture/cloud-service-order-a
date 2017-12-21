@@ -49,9 +49,31 @@ public class WxOrderServiceImpl implements WxOrderService {
         return new PageResult(page);
     }
 
+    /**
+     * 申请退款
+     *
+     * @param orderId
+     * @param wxCode
+     * @param refundFee
+     * @return
+     */
     @Override
-    public DataRet<String> refund(Long orderId, String wxCode) {
-        return null;
+    public DataRet<String> refund(Long orderId, String wxCode, Integer refundFee) {
+        if (StringUtils.isNullOrEmpty(orderId.toString()) && StringUtils.isNullOrEmpty(wxCode)) {
+            return new DataRet<>("ERROR", "传入参数有误");
+        }
+        Order order = wxOrderMapper.findById(orderId);
+        if (CommonEnum.DONE.getCode().equals(order.getOrderStatus())) {
+            return new DataRet<>("ERROR", "订单已完成，不能退款");
+        }
+        if (CommonEnum.UN_PAY.getCode().equals(order.getOrderStatus())) {
+            return new DataRet<>("ERROR", "订单还未付款，请先付款");
+        }
+        int result = wxOrderMapper.refund(orderId, refundFee);
+        if (result < 0) {
+            return new DataRet<>("ERROR", "申请退款失败,请重试");
+        }
+        return new DataRet<>("申请退款成功");
     }
 
     /**

@@ -46,16 +46,18 @@ public class WxOrderController {
     }
 
     /**
-     * 退款
+     * 申请退款/退款金额
      *
-     * @param orderId
-     * @param wxCode
+     * @param orderId   订单id
+     * @param wxCode    微信Code
+     * @param refundFee 退款金额
      * @return
      */
-    @PostMapping("/refund")
+    @GetMapping("/refund")
     public DataRet<String> refund(@RequestParam(value = "order_id") Long orderId,
-                                  @RequestParam(value = "wx_code") String wxCode) {
-        return null;
+                                  @RequestParam(value = "wx_code") String wxCode,
+                                  @RequestParam(value = "refund_fee", required = false) Integer refundFee) {
+        return wxOrderService.refund(orderId, wxCode, refundFee);
     }
 
     /**
@@ -79,4 +81,6 @@ public class WxOrderController {
     public DataRet<String> estimate(@RequestBody Estimate estimate) {
         return null;
     }
+
+
 }

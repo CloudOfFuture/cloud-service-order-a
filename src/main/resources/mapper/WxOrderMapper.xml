@@ -81,4 +81,9 @@
         FROM t_order
         WHERE id=#{orderId}
     </select>
+
+    <!--申请退款-->
+    <update id="refund" parameterType="com.kunlun.entity.Order">
+        UPDATE t_order SET order_status='REFUNDING' , refund_date=NOW() , refund_fee=#{refundFee} WHERE id=#{orderId}
+    </update>
 </mapper>
