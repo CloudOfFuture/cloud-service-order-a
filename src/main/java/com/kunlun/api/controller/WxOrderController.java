@@ -2,6 +2,7 @@ package com.kunlun.api.controller;
 
 import com.kunlun.api.service.WxOrderService;
 import com.kunlun.entity.Estimate;
+import com.kunlun.entity.Order;
 import com.kunlun.entity.OrderExt;
 import com.kunlun.result.DataRet;
 import com.kunlun.result.PageResult;
@@ -60,12 +61,12 @@ public class WxOrderController {
     /**
      * 查询订单详情
      *
-     * @param orderId
+     * @param orderId 订单id
      * @return
      */
     @GetMapping("/findById")
     public DataRet<OrderExt> findById(@RequestParam(value = "order_id") Long orderId) {
-        return null;
+        return wxOrderService.findById(orderId);
     }
 
     /**

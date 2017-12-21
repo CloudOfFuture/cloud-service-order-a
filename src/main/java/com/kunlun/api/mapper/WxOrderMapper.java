@@ -25,4 +25,12 @@ public interface WxOrderMapper {
     Page<Order> findByOpenid(@Param("userId") String userId,
                              @Param("orderStatus") String orderStatus,
                              @Param("payType") String payType);
+
+    /**
+     * 查询订单详情
+     *
+     * @param orderId
+     * @return
+     */
+    OrderExt findById(Long orderId);
 }

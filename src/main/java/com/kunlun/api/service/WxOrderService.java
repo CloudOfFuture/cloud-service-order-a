@@ -1,5 +1,7 @@
 package com.kunlun.api.service;
 
+import com.kunlun.entity.Order;
+import com.kunlun.entity.OrderExt;
 import com.kunlun.result.DataRet;
 import com.kunlun.result.PageResult;
 import com.kunlun.wxentity.OrderCondition;
@@ -32,4 +34,12 @@ public interface WxOrderService {
      * @return
      */
     DataRet<String> refund(Long orderId, String wxCode);
+
+    /**
+     * 查询订单详情
+     *
+     * @param orderId
+     * @return
+     */
+    DataRet<OrderExt> findById(Long orderId);
 }
