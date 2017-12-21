@@ -42,7 +42,7 @@ public class OrderServiceImpl implements OrderService {
         }
         PageHelper.startPage(pageNo, pageSize);
         Page<Order> page = orderMapper.list(orderNo, phone, status, type, searchKey);
-        return null;
+        return new PageResult(page);
     }
 
     /**
@@ -160,4 +160,6 @@ public class OrderServiceImpl implements OrderService {
         logistics.setSenderId(orderCondition.getSellerId());
         return logistics;
     }
+
+
 }
