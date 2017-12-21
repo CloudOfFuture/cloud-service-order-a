@@ -26,12 +26,13 @@ public class WxOrderController {
     private WxOrderService wxOrderService;
 
     /**
-     * 订单列表
+     * 我的订单列表/   分类查询（订单状态/支付类型）
      *
      * @param pageNo      当前页
-     * @param pageSize    每页条数
+     * @param pageSize    每条页数
      * @param wxCode      微信code
      * @param orderStatus 订单状态
+     * @param payType     支付类型
      * @return
      */
     @GetMapping("/findByOpenid")

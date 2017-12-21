@@ -5,6 +5,7 @@ import com.github.pagehelper.PageHelper;
 import com.kunlun.api.mapper.WxOrderMapper;
 import com.kunlun.entity.Order;
 import com.kunlun.entity.OrderExt;
+import com.kunlun.enums.CommonEnum;
 import com.kunlun.result.DataRet;
 import com.kunlun.result.PageResult;
 import com.kunlun.wxentity.OrderCondition;
@@ -39,7 +40,10 @@ public class WxOrderServiceImpl implements WxOrderService {
 //        String userId = WxUtil.getOpenId(wxCode);
         PageHelper.startPage(pageNo, pageSize);
         if (StringUtils.isNullOrEmpty(wxCode)) {
-            return new PageResult();
+            return new PageResult("ERROR", "微信code为空");
+        }
+        if (CommonEnum.ALL.getCode().equals(orderStatus)) {
+            orderStatus = null;
         }
         Page<Order> page = wxOrderMapper.findByOpenid(wxCode, orderStatus, payType);
         return new PageResult(page);
