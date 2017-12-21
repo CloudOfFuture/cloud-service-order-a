@@ -27,4 +27,5 @@ public class IndexServiceImpl implements IndexService {
         restTemplate.getForObject("http://cloud-ribbon-server/api/ribbon/log?order_id=" + orderId, DataRet.class);
         return new DataRet<>("调用完成");
     }
+    
 }
