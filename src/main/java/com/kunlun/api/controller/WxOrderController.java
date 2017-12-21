@@ -25,11 +25,17 @@ public class WxOrderController {
     /**
      * 订单列表
      *
-     * @param orderCondition
+     * @param pageNo   当前页
+     * @param pageSize 每页条数
+     * @param wxCode   微信code
+     * @param status   订单状态
      * @return
      */
-    @GetMapping("/findByCondition")
-    public PageResult findByCondition(@RequestBody OrderCondition orderCondition) {
+    @GetMapping("/findByOpenid")
+    public PageResult findByOpenid(@RequestParam(value = "page_no") Integer pageNo,
+                                   @RequestParam(value = "page_size") Integer pageSize,
+                                   @RequestParam(value = "wx_code") String wxCode,
+                                   @RequestParam(value = "status") String status) {
         return null;
     }
 

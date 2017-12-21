@@ -29,15 +29,31 @@ public class WxOrderServiceImpl implements WxOrderService {
      * @param orderCondition
      * @return
      */
+//    @Override
+//    public PageResult findByCondition(OrderCondition orderCondition) {
+//        if (null == orderCondition || StringUtils.isNullOrEmpty(orderCondition.getWxCode())) {
+//            return new PageResult("ERROR", "参数错误");
+//        }
+//        String openId = WxUtil.getOpenId(orderCondition.getWxCode());
+//        PageHelper.startPage(orderCondition.getPageNo(), orderCondition.getPageSize());
+//        Page<OrderExt> page = wxOrderMapper.findByCondition(openId, orderCondition.getStatus());
+//        return new PageResult(page);
+//    }
+
+    /**
+     * 订单列表
+     *
+     * @param pageNo   当前页
+     * @param pageSize 每页条数
+     * @param wxCode   微信code
+     * @param status   订单状态
+     * @return
+     */
     @Override
-    public PageResult findByCondition(OrderCondition orderCondition) {
-        if (null == orderCondition || StringUtils.isNullOrEmpty(orderCondition.getWxCode())) {
-            return new PageResult("ERROR", "参数错误");
-        }
-        String openId = WxUtil.getOpenId(orderCondition.getWxCode());
-        PageHelper.startPage(orderCondition.getPageNo(), orderCondition.getPageSize());
-        Page<OrderExt> page = wxOrderMapper.findByCondition(openId, orderCondition.getStatus());
-        return new PageResult(page);
+    public PageResult findByOpenid(Integer pageNo, Integer pageSize, String wxCode, String status) {
+
+
+        return null;
     }
 
     @Override
