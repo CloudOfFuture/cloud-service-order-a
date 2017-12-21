@@ -24,7 +24,7 @@ public class IndexServiceImpl implements IndexService {
     public DataRet<String> logTest(Long orderId) {
         LOGGER.info("cloud-service-order接收到参数：" + orderId);
         LOGGER.info("RestTemplate发送请求到Log服务");
-        restTemplate.getForObject("http://cloud-ribbon-server/ribbon/log?order_id=" + orderId, DataRet.class);
+        restTemplate.getForObject("http://cloud-ribbon-server/api/ribbon/log?order_id=" + orderId, DataRet.class);
         return new DataRet<>("调用完成");
     }
 }
