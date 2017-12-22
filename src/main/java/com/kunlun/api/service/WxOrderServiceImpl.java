@@ -83,7 +83,7 @@ public class WxOrderServiceImpl implements WxOrderService {
      */
     @Override
     public DataRet<OrderExt> findById(Long orderId) {
-        if (StringUtils.isNullOrEmpty(orderId.toString())) {
+        if (orderId == null) {
             return new DataRet<>("ERROR", "传入的参数有误");
         }
         OrderExt orderExt = wxOrderMapper.findById(orderId);
@@ -92,5 +92,62 @@ public class WxOrderServiceImpl implements WxOrderService {
             return new DataRet<>("ERROR", "订单不存在");
         }
         return new DataRet<>(orderExt);
+    }
+
+    /**
+     * 确认收货
+     *
+     * @param orderId
+     * @return
+     */
+    @Override
+    public DataRet<String> confirmByGood(Long orderId, String ipAddress) {
+        if (orderId == null) {
+            return new DataRet<>("ERROR", "传入的参数有误");
+        }
+        //查询订单详情
+        Order order = wxOrderMapper.findById(orderId);
+        if (order == null) {
+            return new DataRet<>("ERROR", "订单不存在");
+        }
+        //判断/更改订单状态(已完成）
+        if (!CommonEnum.UN_RECEIVE.getCode().equals(order.getOrderStatus())) {
+            return new DataRet<>("ERROR", "订单状态不对，不能确认收货");
+        }
+        int result = wxOrderMapper.updateOrderStatus(orderId, CommonEnum.DONE.getCode());
+        if (result > 0) {
+            //TODO 保存订单日志
+            return new DataRet<>("确认收货成功");
+        }
+        return new DataRet<>("ERROR", "确认收货失败");
+    }
+
+    /**
+     * 取消订单
+     *
+     * @param orderId
+     * @param ipAddress
+     * @return
+     */
+    @Override
+    public DataRet<String> cancelByOrder(Long orderId, String ipAddress) {
+        if (orderId == null) {
+            return new DataRet<>("ERROR", "传入的参数有误");
+        }
+        //查询订单详情
+        Order order = wxOrderMapper.findById(orderId);
+        if (order == null) {
+            return new DataRet<>("ERROR", "订单不存在");
+        }
+        //关闭订单
+        if (!CommonEnum.UN_PAY.getCode().equals(order.getOrderStatus())) {
+            return new DataRet<>("ERROR", "订单状态异常，不能取消订单");
+        }
+        int result = wxOrderMapper.updateOrderStatus(orderId, CommonEnum.CLOSING.getCode());
+        if (result > 0) {
+            //TODO 保存日志
+            return new DataRet<>("取消订单成功");
+        }
+        return new DataRet<>("ERROR", "取消订单失败");
     }
 }

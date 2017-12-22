@@ -86,4 +86,9 @@
     <update id="refund" parameterType="com.kunlun.entity.Order">
         UPDATE t_order SET order_status='REFUNDING' , refund_date=NOW() , refund_fee=#{refundFee} WHERE id=#{orderId}
     </update>
+
+    <!--更新订单状态-->
+    <update id="updateOrderStatus" parameterType="com.kunlun.entity.Order">
+        UPDATE t_order SET order_status=#{orderStatus} WHERE id=#{orderId}
+    </update>
 </mapper>

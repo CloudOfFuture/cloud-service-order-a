@@ -32,7 +32,7 @@ public interface WxOrderMapper {
      * @param orderId
      * @return
      */
-    OrderExt findById(Long orderId);
+    OrderExt findById(@Param("orderId") Long orderId);
 
     /**
      * 申请退款
@@ -41,4 +41,14 @@ public interface WxOrderMapper {
      * @return
      */
     int refund(@Param("orderId") Long orderId, @Param("refundFee") Integer refundFee);
+
+    /**
+     * 更新订单状态
+     *
+     * @param orderId
+     * @param orderStatus
+     * @return
+     */
+    int updateOrderStatus(@Param("orderId") Long orderId, @Param("orderStatus") String orderStatus);
+
 }

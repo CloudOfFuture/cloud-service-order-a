@@ -6,6 +6,7 @@ import com.kunlun.entity.Order;
 import com.kunlun.entity.OrderExt;
 import com.kunlun.result.DataRet;
 import com.kunlun.result.PageResult;
+import com.kunlun.utils.IpUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author by kunlun
@@ -71,16 +74,34 @@ public class WxOrderController {
         return wxOrderService.findById(orderId);
     }
 
+    //TODO 签收后评价（cloud-service-common）
+
     /**
-     * 签收后评价
+     * 确认收货
      *
-     * @param estimate
+     * @param orderId 订单id
+     * @param request 请求ip
      * @return
      */
-    @PostMapping("/estimate")
-    public DataRet<String> estimate(@RequestBody Estimate estimate) {
-        return null;
+    @GetMapping("/confirmByGood")
+    public DataRet<String> confirmByGood(@RequestParam(value = "order_id") Long orderId,
+                                         HttpServletRequest request) {
+        String ipAddress = IpUtil.getIPAddress(request);
+        return wxOrderService.confirmByGood(orderId, ipAddress);
     }
 
+    /**
+     * 取消订单
+     *
+     * @param orderId 订单id
+     * @param request 请求ip
+     * @return
+     */
+    @GetMapping("/cancelByOrder")
+    public DataRet<String> cancelByOrder(@RequestParam(value = "order_id") Long orderId,
+                                         HttpServletRequest request) {
+        String ipAddress = IpUtil.getIPAddress(request);
+        return wxOrderService.cancelByOrder(orderId, ipAddress);
+    }
 
 }

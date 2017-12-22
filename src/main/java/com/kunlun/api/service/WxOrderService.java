@@ -7,6 +7,8 @@ import com.kunlun.result.PageResult;
 import com.kunlun.wxentity.OrderCondition;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * @author by kunlun
  * @version <0.1>
@@ -43,4 +45,21 @@ public interface WxOrderService {
      * @return
      */
     DataRet<OrderExt> findById(Long orderId);
+
+    /**
+     * 确认收货
+     *
+     * @param orderId
+     * @return
+     */
+    DataRet<String> confirmByGood(Long orderId, String ipAddress);
+
+    /**
+     * 取消订单
+     *
+     * @param orderId
+     * @param ipAddress
+     * @return
+     */
+    DataRet<String> cancelByOrder(Long orderId, String ipAddress);
 }
