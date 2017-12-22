@@ -44,7 +44,7 @@ public class WxOrderServiceImpl implements WxOrderService {
         if (CommonEnum.ALL.getCode().equals(orderStatus)) {
             orderStatus = null;
         }
-        Page<Order> page = wxOrderMapper.findByOpenid(userId, orderStatus, payType);
+        Page<Order> page = wxOrderMapper.findByOpenid(wxCode, orderStatus, payType);
         return new PageResult(page);
     }
 
