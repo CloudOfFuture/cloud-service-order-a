@@ -38,13 +38,13 @@ public class WxOrderServiceImpl implements WxOrderService {
     public PageResult findByOpenid(Integer pageNo, Integer pageSize, String wxCode, String orderStatus, String payType) {
         String userId = WxUtil.getOpenId(wxCode);
         PageHelper.startPage(pageNo, pageSize);
-        if (StringUtils.isNullOrEmpty(userId)) {
+        if (StringUtils.isNullOrEmpty(wxCode)) {
             return new PageResult("ERROR", "微信code为空");
         }
         if (CommonEnum.ALL.getCode().equals(orderStatus)) {
             orderStatus = null;
         }
-        Page<Order> page = wxOrderMapper.findByOpenid(wxCode, orderStatus, payType);
+        Page<Order> page = wxOrderMapper.findByOpenid(userId, orderStatus, payType);
         return new PageResult(page);
     }
 
