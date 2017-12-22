@@ -82,16 +82,16 @@ public class WxOrderServiceImpl implements WxOrderService {
      * @return
      */
     @Override
-    public DataRet<OrderExt> findById(Long orderId) {
+    public DataRet<Order> findById(Long orderId) {
         if (orderId == null) {
             return new DataRet<>("ERROR", "传入的参数有误");
         }
-        OrderExt orderExt = wxOrderMapper.findById(orderId);
+        Order order = wxOrderMapper.findById(orderId);
         //TODO 订单发货信息 订单收货地址
-        if (orderExt == null) {
+        if (order == null) {
             return new DataRet<>("ERROR", "订单不存在");
         }
-        return new DataRet<>(orderExt);
+        return new DataRet<>(order);
     }
 
     /**

@@ -37,7 +37,7 @@
     </select>
 
     <!--查询订单详情-->
-    <select id="findById" resultType="com.kunlun.entity.OrderExt">
+    <select id="findById" resultType="com.kunlun.entity.Order">
         SELECT id,
         seller_id,
         user_id,
