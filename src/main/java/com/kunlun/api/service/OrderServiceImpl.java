@@ -5,6 +5,7 @@ import com.github.pagehelper.PageHelper;
 import com.kunlun.api.mapper.OrderMapper;
 import com.kunlun.entity.Logistics;
 import com.kunlun.entity.Order;
+import com.kunlun.entity.OrderLog;
 import com.kunlun.enums.CommonEnum;
 import com.kunlun.result.DataRet;
 import com.kunlun.result.PageResult;
@@ -12,6 +13,7 @@ import com.kunlun.wxentity.OrderCondition;
 import com.mysql.jdbc.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 /**
  * @author by kunlun
@@ -23,6 +25,9 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     private OrderMapper orderMapper;
+
+    @Autowired
+    private RestTemplate restTemplate;
 
     /**
      * @param orderNo   订单号
@@ -72,7 +77,7 @@ public class OrderServiceImpl implements OrderService {
             return new DataRet<>("ERROR", "订单不存在");
         }
         Logistics logistics = this.logistics(orderCondition);
-        //TODO 配送信息
+        restTemplate.postForObject("http://cloud-ribbon-server/api/...",logistics,DataRet.class);
         //TODO  调用日志服务  暂时未写
 
         orderMapper.updateOrderStatus(orderId,

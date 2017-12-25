@@ -43,8 +43,9 @@ public class IndexController {
      * @return
      */
     @GetMapping("/log")
-    public DataRet<String> logTest(@RequestParam(value = "order_id") Long orderId) {
-        return indexService.logTest(orderId);
+    public DataRet<String> logTest(@RequestParam("orderNo") String orderNo) {
+        System.out.println("order服务收到的订单号为  ：" + orderNo);
+        return null;
     }
 
 }

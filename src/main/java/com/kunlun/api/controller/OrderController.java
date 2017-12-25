@@ -26,6 +26,17 @@ public class OrderController {
     @Autowired
     private OrderService orderService;
 
+    /**
+     * 订单列表
+     * @param orderNo
+     * @param phone
+     * @param status
+     * @param type
+     * @param searchKey
+     * @param pageNo
+     * @param pageSize
+     * @return
+     */
     @GetMapping("/findByCondition")
     public PageResult list(@RequestParam(value = "order_no") String orderNo,
                            @RequestParam(value = "phone") String phone,
