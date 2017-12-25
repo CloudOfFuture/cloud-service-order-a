@@ -39,13 +39,11 @@ public class IndexController {
     /**
      * 测试服务之间调用
      *
-     * @param orderId
      * @return
      */
     @GetMapping("/log")
     public DataRet<String> logTest(@RequestParam("orderNo") String orderNo) {
-        System.out.println("order服务收到的订单号为  ：" + orderNo);
-        return null;
+        return new DataRet<>("我是服务A：orderNo=" + orderNo);
     }
 
 }
