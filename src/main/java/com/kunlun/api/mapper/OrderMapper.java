@@ -76,19 +76,14 @@ public interface OrderMapper {
                @Param("remark") String remark,
                @Param("phone") String phone);
 
+
     /**
-     * 退款审核
+     * 退款
      *
-     * @param orderId
-     * @param flag
-     * @param remark
-     * @param refundFee
-     * @param sellerId
+     * @param order
      * @return
      */
-    int auditRefund(@Param("orderId") Long orderId,
-                    @Param("flag") String flag,
-                    @Param("remark") String remark,
-                    @Param("refundFee") Integer refundFee,
-                    @Param("sellerId") Long sellerId);
+    int refund(Order order);
+
+
 }

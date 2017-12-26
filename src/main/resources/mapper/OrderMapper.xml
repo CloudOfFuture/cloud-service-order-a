@@ -108,7 +108,7 @@
         </if>
     </select>
 
-    <update id="auditRefund">
-        UPDATE t_order SET flag=#{flag},remark=#{remark},refund_fee=#{refundFee} WHERE id=#{orderId} AND seller_id=#{sellerId}
+    <update id="refund" parameterType="com.kunlun.entity.Order">
+        UPDATE t_order SET flag=#{flag},remark=#{remark},refund_fee=#{refundFee},update_date=NOW() WHERE id=#{orderId} AND seller_id=#{sellerId}
     </update>
 </mapper>

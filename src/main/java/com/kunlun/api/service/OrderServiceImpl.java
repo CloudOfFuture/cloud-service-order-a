@@ -108,42 +108,18 @@ public class OrderServiceImpl implements OrderService {
     }
 
     /**
-     * 退款审核
+     * 退款
      *
-     * @param orderId   订单id
-     * @param flag      AGREE同意  REFUSE  拒绝
-     * @param remark    退款备注
-     * @param refundFee 退款金额
-     * @param sellerId  商家id
+     * @param order
      * @return
      */
     @Override
-    public DataRet<String> auditRefund(Long orderId, String flag, String remark, Integer refundFee, Long sellerId) {
-        Order order = orderMapper.findByOrderIdAndSellerId(orderId, sellerId, null);
-        if (order == null) {
-            return new DataRet<>("ERROR", "订单不存在");
+    public DataRet<String> refund(Order order) {
+        int result = orderMapper.refund(order);
+        if (result > 0) {
+            return new DataRet<>("退款成功");
         }
-        if (CommonEnum.REFUSE.getCode().equals(flag)) {
-            orderMapper.auditRefund(orderId, CommonEnum.REFUSE.getCode(), remark, 0, sellerId);
-        } else {
-            orderMapper.auditRefund(orderId, flag, remark, refundFee, sellerId);
-
-
-        }
-        //TODO 生成退款日志
-        //TODO 调用商品库存服务 库存返还
-        //TODO 调用个人中心服务 积分返还  积分日志
-        return new DataRet<>("审核成功");
-    }
-
-
-    private Logistics logistics(OrderCondition orderCondition) {
-        Logistics logistics = new Logistics();
-        logistics.setCompanyCode(orderCondition.getCompanyCode());
-        logistics.setOrderId(orderCondition.getOrderId());
-        logistics.setLogisticName(orderCondition.getLogisticName());
-        logistics.setSenderId(orderCondition.getSellerId());
-        return logistics;
+        return new DataRet<>("ERROR", "退款失败");
     }
 
 

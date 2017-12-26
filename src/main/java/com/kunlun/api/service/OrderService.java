@@ -53,15 +53,6 @@ public interface OrderService {
      */
     DataRet<Order> findById(Long orderId, Long sellerId);
 
-    /**
-     * 退款审核
-     *
-     * @param orderId   订单id
-     * @param flag      AGREE同意  REFUSE  拒绝
-     * @param remark    退款备注
-     * @param refundFee 退款金额
-     * @param sellerId  商家id
-     * @return
-     */
-    DataRet<String> auditRefund(Long orderId, String flag, String remark, Integer refundFee, Long sellerId);
+    DataRet<String> refund(Order order);
+
 }

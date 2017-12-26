@@ -28,6 +28,7 @@ public class OrderController {
 
     /**
      * 订单列表
+     *
      * @param orderNo
      * @param phone
      * @param status
@@ -84,22 +85,14 @@ public class OrderController {
     }
 
     /**
-     * 退款审核
+     * 退款
      *
-     * @param orderId   订单id
-     * @param flag      AGREE同意 REFUSE 拒绝
-     * @param remark    退款备注
-     * @param refundFee 退款金额
-     * @param sellerId  商家id
+     * @param order
      * @return
      */
-    @GetMapping("/audit/refund")
-    public DataRet<String> auditRefund(@RequestParam(value = "order_id") Long orderId,
-                                       @RequestParam(value = "flag") String flag,
-                                       @RequestParam(value = "remark") String remark,
-                                       @RequestParam(value = "refund_fee") Integer refundFee,
-                                       @RequestHeader(value = "seller_id") Long sellerId) {
-        return orderService.auditRefund(orderId, flag, remark, refundFee, sellerId);
+    @PostMapping("/refund")
+    public DataRet<String> refund(@RequestBody Order order) {
+        return orderService.refund(order);
     }
 
 }
