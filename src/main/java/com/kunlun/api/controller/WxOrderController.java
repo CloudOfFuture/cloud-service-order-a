@@ -40,11 +40,11 @@ public class WxOrderController {
      * @return
      */
     @GetMapping("/findByOpenid")
-    public PageResult findByOpenid(@RequestParam(value = "page_no") Integer pageNo,
-                                   @RequestParam(value = "page_size") Integer pageSize,
-                                   @RequestParam(value = "wx_code") String wxCode,
-                                   @RequestParam(value = "order_status", required = false) String orderStatus,
-                                   @RequestParam(value = "pay_type", required = false) String payType) {
+    public PageResult findByOpenid(@RequestParam(value = "pageNo") Integer pageNo,
+                                   @RequestParam(value = "pageSize") Integer pageSize,
+                                   @RequestParam(value = "wxCode") String wxCode,
+                                   @RequestParam(value = "orderStatus", required = false) String orderStatus,
+                                   @RequestParam(value = "payType", required = false) String payType) {
         return wxOrderService.findByOpenid(pageNo, pageSize, wxCode, orderStatus, payType);
     }
 
@@ -52,15 +52,11 @@ public class WxOrderController {
      * 申请退款/退款金额
      *
      * @param orderId   订单id
-     * @param wxCode    微信Code
-     * @param refundFee 退款金额
      * @return
      */
     @GetMapping("/refund")
-    public DataRet<String> refund(@RequestParam(value = "order_id") Long orderId,
-                                  @RequestParam(value = "wx_code") String wxCode,
-                                  @RequestParam(value = "refund_fee", required = false) Integer refundFee) {
-        return wxOrderService.refund(orderId, wxCode, refundFee);
+    public DataRet<String> refund(@RequestParam(value = "order_id") Long orderId) {
+        return wxOrderService.refund(orderId);
     }
 
     /**

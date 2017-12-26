@@ -32,11 +32,9 @@ public interface WxOrderService {
      * 申请退款
      *
      * @param orderId
-     * @param wxCode
-     * @param refundFee
      * @return
      */
-    DataRet<String> refund(Long orderId, String wxCode, Integer refundFee);
+    DataRet<String> refund(Long orderId);
 
     /**
      * 查询订单详情
