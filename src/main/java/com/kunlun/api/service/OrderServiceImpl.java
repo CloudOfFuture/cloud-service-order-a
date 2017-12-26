@@ -85,7 +85,7 @@ public class OrderServiceImpl implements OrderService {
 //                logistics.getLogisticNo(), logistics.getId());
 
 
-        return new DataRet<>("发货成功");
+        return new DataRet<>(order.getOrderNo());
     }
 
     /**
