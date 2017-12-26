@@ -39,13 +39,13 @@ public class OrderController {
      * @return
      */
     @GetMapping("/findByCondition")
-    public PageResult list(@RequestParam(value = "order_no") String orderNo,
+    public PageResult list(@RequestParam(value = "orderNo") String orderNo,
                            @RequestParam(value = "phone") String phone,
                            @RequestParam(value = "status") String status,
                            @RequestParam(value = "type") String type,
-                           @RequestParam(value = "search_key") String searchKey,
-                           @RequestParam(value = "page_no") Integer pageNo,
-                           @RequestParam(value = "page_size") Integer pageSize) {
+                           @RequestParam(value = "searchKey") String searchKey,
+                           @RequestParam(value = "pageNo") Integer pageNo,
+                           @RequestParam(value = "pageSize") Integer pageSize) {
         return orderService.list(orderNo, phone, status, type, searchKey, pageNo, pageSize);
     }
 
@@ -79,7 +79,7 @@ public class OrderController {
      * @return
      */
     @GetMapping("/findById")
-    public DataRet<Order> findById(@RequestParam(value = "order_id") Long orderId,
+    public DataRet<Order> findById(@RequestParam(value = "orderId") Long orderId,
                                    @RequestHeader Long sellerId) {
         return orderService.findById(orderId, sellerId);
     }
