@@ -76,13 +76,13 @@ public class OrderServiceImpl implements OrderService {
         if (null == order) {
             return new DataRet<>("ERROR", "订单不存在");
         }
-        Logistics logistics = this.logistics(orderCondition);
-        restTemplate.postForObject("http://cloud-ribbon-server/api/...",logistics,DataRet.class);
-        //TODO  调用日志服务  暂时未写
-
-        orderMapper.updateOrderStatus(orderId,
-                CommonEnum.UN_RECEIVE.getCode(),
-                logistics.getLogisticNo(), logistics.getId());
+//        Logistics logistics = this.logistics(orderCondition);
+//        restTemplate.postForObject("http://cloud-ribbon-server/api/...",logistics,DataRet.class);
+//        //TODO  调用日志服务  暂时未写
+//
+//        orderMapper.updateOrderStatus(orderId,
+//                CommonEnum.UN_RECEIVE.getCode(),
+//                logistics.getLogisticNo(), logistics.getId());
 
 
         return new DataRet<>("发货成功");
