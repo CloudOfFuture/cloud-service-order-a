@@ -26,9 +26,6 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     private OrderMapper orderMapper;
 
-    @Autowired
-    private RestTemplate restTemplate;
-
     /**
      * @param orderNo   订单号
      * @param phone     收件人手机
@@ -59,15 +56,6 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public DataRet<String> sendGood(OrderCondition orderCondition) {
         Long orderId = orderCondition.getOrderId();
-        if (null == orderId) {
-            return new DataRet<>("ERROR", "参数错误");
-        }
-        if (StringUtils.isNullOrEmpty(orderCondition.getLogisticNo())) {
-            return new DataRet<>("ERROR", "运单号不能为空");
-        }
-        if (StringUtils.isNullOrEmpty(orderCondition.getLogisticName())) {
-            return new DataRet<>("ERROR", "快递公司不能为空");
-        }
         /**
          * 根据 订单id、店铺id、订单状态为待发货查询订单
          */
@@ -76,14 +64,6 @@ public class OrderServiceImpl implements OrderService {
         if (null == order) {
             return new DataRet<>("ERROR", "订单不存在");
         }
-//        Logistics logistics = this.logistics(orderCondition);
-//        restTemplate.postForObject("http://cloud-ribbon-server/api/...",logistics,DataRet.class);
-//        //TODO  调用日志服务  暂时未写
-//
-//        orderMapper.updateOrderStatus(orderId,
-//                CommonEnum.UN_RECEIVE.getCode(),
-//                logistics.getLogisticNo(), logistics.getId());
-
 
         return new DataRet<>(order.getOrderNo());
     }
