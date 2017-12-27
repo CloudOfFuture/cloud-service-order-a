@@ -100,4 +100,14 @@ public class WxOrderController {
         return wxOrderService.cancelByOrder(orderId, ipAddress);
     }
 
+    /**
+     * 新增订单
+     * @param order
+     * @return
+     */
+    @PostMapping("/addOrder")
+    public DataRet<String> addOrder(@RequestBody Order order){
+        return wxOrderService.addOrder(order);
+    }
+
 }

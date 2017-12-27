@@ -12,6 +12,7 @@ import com.kunlun.utils.WxUtil;
 import com.mysql.jdbc.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author by kunlun
@@ -134,5 +135,20 @@ public class WxOrderServiceImpl implements WxOrderService {
             return new DataRet<>("取消订单成功");
         }
         return new DataRet<>("ERROR", "取消订单失败");
+    }
+
+    /**
+     * 新增订单
+     *
+     * @param order
+     * @return
+     */
+    @Override
+    public DataRet<String> addOrder(Order order) {
+        Integer res = wxOrderMapper.addOrder(order);
+        if(res<=0){
+            return new DataRet<String>("ERROR","下单失败");
+        }
+        return new DataRet<>("下单成功");
     }
 }

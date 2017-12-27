@@ -51,4 +51,11 @@ public interface WxOrderMapper {
      */
     int updateOrderStatus(@Param("orderId") Long orderId, @Param("orderStatus") String orderStatus);
 
+
+    /**
+     * 新增订单
+     * @param order
+     * @return
+     */
+    int addOrder(Order order);
 }
