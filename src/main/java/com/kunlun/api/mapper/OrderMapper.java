@@ -85,5 +85,12 @@ public interface OrderMapper {
      */
     int refund(Order order);
 
+    /**
+     * 修改订单状态
+     * @param id
+     * @param status
+     * @return
+     */
+    int modifyOrderStatus(@Param("id") Long id,@Param("status") String status);
 
 }

@@ -53,6 +53,18 @@ public interface OrderService {
      */
     DataRet<Order> findById(Long orderId, Long sellerId);
 
+    /**
+     * 退款
+     * @param order
+     * @return
+     */
     DataRet<String> refund(Order order);
 
+    /**
+     * 修改订单装态
+     * @param id
+     * @param status
+     * @return
+     */
+    DataRet<String> modifyOrderStatus(Long id,String status);
 }

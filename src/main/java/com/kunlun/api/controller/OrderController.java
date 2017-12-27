@@ -95,4 +95,15 @@ public class OrderController {
         return orderService.refund(order);
     }
 
+    /**
+     * 修改订单状态
+     * @param id
+     * @param status
+     * @return
+     */
+    @PostMapping("/modifyStatus")
+    public DataRet<String> modifyOrderById(@RequestParam(value = "id")Long id,
+                                           @RequestParam(value = "status") String status){
+        return orderService.modifyOrderStatus(id,status);
+    }
 }

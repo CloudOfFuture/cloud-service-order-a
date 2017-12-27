@@ -108,7 +108,12 @@
         </if>
     </select>
 
+    <!--退款-->
     <update id="refund" parameterType="com.kunlun.entity.Order">
         UPDATE t_order SET flag=#{flag},remark=#{remark},refund_fee=#{refundFee},update_date=NOW() WHERE id=#{orderId} AND seller_id=#{sellerId}
+    </update>
+
+    <update id="modifyOrderStatus">
+        UPDATE t_order SET order_status=#{status} WHERE id = #{id}
     </update>
 </mapper>
