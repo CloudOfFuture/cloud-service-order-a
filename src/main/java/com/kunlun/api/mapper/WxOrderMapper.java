@@ -58,4 +58,12 @@ public interface WxOrderMapper {
      * @return
      */
     int addOrder(Order order);
+
+    /**
+     * 修改订单预付款订单号
+     * @param id
+     * @param prepayId
+     * @return
+     */
+    int updatePrepayId(@Param("id") Long id,@Param("prepayId") String prepayId);
 }

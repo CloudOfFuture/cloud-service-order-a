@@ -163,4 +163,9 @@
         #{usePoint}
         )
     </insert>
+
+    <!--修改预付订单id-->
+    <update id="updatePrepayId">
+        UPDATE t_order SET prepay_id=#{prepayId} WHERE id = #{id}
+    </update>
 </mapper>

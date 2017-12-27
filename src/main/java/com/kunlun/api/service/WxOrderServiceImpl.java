@@ -151,4 +151,20 @@ public class WxOrderServiceImpl implements WxOrderService {
         }
         return new DataRet<>("下单成功");
     }
+
+    /**
+     * 修改订单预付款订单号
+     *
+     * @param id
+     * @param prepayId
+     * @return
+     */
+    @Override
+    public DataRet<String> updateOrderPrepayId(Long id, String prepayId) {
+        Integer result = wxOrderMapper.updatePrepayId(id,prepayId);
+        if(result<=0){
+            return new DataRet<>("ERROR","修改预付款订单号失败");
+        }
+        return new DataRet<>("修改成功");
+    }
 }

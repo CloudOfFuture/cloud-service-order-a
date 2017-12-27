@@ -110,4 +110,16 @@ public class WxOrderController {
         return wxOrderService.addOrder(order);
     }
 
+    /**
+     * 修改订单预付款订单号
+     * @param id
+     * @param prepayId
+     * @return
+     */
+    @PostMapping("/updatePrepayId")
+    public DataRet<String> updateOrderPrepayId(@RequestParam(value = "id") Long id,
+                                               @RequestParam(value = "prepayId") String prepayId){
+        return wxOrderService.updateOrderPrepayId(id,prepayId);
+    }
+
 }
