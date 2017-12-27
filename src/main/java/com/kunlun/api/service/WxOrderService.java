@@ -60,4 +60,19 @@ public interface WxOrderService {
      * @return
      */
     DataRet<String> cancelByOrder(Long orderId, String ipAddress);
+
+    /**
+     * 新增订单
+     * @param order
+     * @return
+     */
+    DataRet<String> addOrder(Order order);
+
+    /**
+     * 修改订单预付款订单号
+     * @param id
+     * @param prepayId
+     * @return
+     */
+    DataRet<String> updateOrderPrepayId(Long id,String prepayId);
 }
