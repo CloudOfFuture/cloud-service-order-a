@@ -93,4 +93,22 @@ public interface OrderMapper {
      */
     int modifyOrderStatus(@Param("id") Long id,@Param("status") String status);
 
+
+    /**
+     * 根据微信订单号查找订单
+     * @param orderNo
+     * @return
+     */
+    Order findOrderByOrderNo(@Param("orderNo") String orderNo);
+
+    /**
+     * 修改订单状态和微信支付订单号
+     * @param id
+     * @param status
+     * @param wxOrderNo
+     * @return
+     */
+    int modifyOrderStatusAndWxOrderNo(@Param("id") Long id,
+                                      @Param("status") String status,
+                                      @Param("wxOrderNo") String wxOrderNo);
 }

@@ -139,5 +139,37 @@ public class OrderServiceImpl implements OrderService {
         return new DataRet<>("修改状态成功");
     }
 
+    /**
+     * 根据订单号查找订单
+     *
+     * @param orderNo
+     * @return
+     */
+    @Override
+    public DataRet<Order> findByOrderNo(String orderNo) {
+        Order order = orderMapper.findOrderByOrderNo(orderNo);
+        if(order==null){
+            return new DataRet<>("ERROR","查无此订单");
+        }
+        return new DataRet<>(order);
+    }
+
+    /**
+     * 修改微信订单状态和微信支付订单号
+     *
+     * @param id
+     * @param status
+     * @param wxOrderNo
+     * @return
+     */
+    @Override
+    public DataRet<String> modifyStatusAndWxOrderNo(Long id, String status, String wxOrderNo) {
+        Integer result = orderMapper.modifyOrderStatusAndWxOrderNo(id,status,wxOrderNo);
+        if(result<=0){
+            return new DataRet<>("ERROR","修改订单状态失败");
+        }
+        return new DataRet<>("操作成功");
+    }
+
 
 }

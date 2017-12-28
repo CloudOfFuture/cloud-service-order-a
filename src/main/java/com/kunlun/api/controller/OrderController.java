@@ -85,6 +85,16 @@ public class OrderController {
     }
 
     /**
+     * 根据订单编号查找订单
+     * @param orderNo
+     * @return
+     */
+    @GetMapping("/findByOrderNo")
+    public DataRet<Order> findByOrderNo(@RequestParam(value = "orderNo") String orderNo){
+        return orderService.findByOrderNo(orderNo);
+    }
+
+    /**
      * 退款
      *
      * @param order
@@ -105,5 +115,12 @@ public class OrderController {
     public DataRet<String> modifyOrderById(@RequestParam(value = "id")Long id,
                                            @RequestParam(value = "status") String status){
         return orderService.modifyOrderStatus(id,status);
+    }
+
+    @PostMapping("/modifyStatusAndPayOrderNo")
+    public DataRet<String> modifyStatusAndPayOrderNo(@RequestParam(value = "id") Long id,
+                                                     @RequestParam(value = "status")String status,
+                                                     @RequestParam(value = "wxOrderNo") String wxOrderNo){
+        return  orderService.modifyStatusAndWxOrderNo(id,status,wxOrderNo);
     }
 }

@@ -113,7 +113,26 @@
         UPDATE t_order SET flag=#{flag},remark=#{remark},refund_fee=#{refundFee},update_date=NOW() WHERE id=#{orderId} AND seller_id=#{sellerId}
     </update>
 
+    <!--修改订单状态-->
     <update id="modifyOrderStatus">
-        UPDATE t_order SET order_status=#{status} WHERE id = #{id}
+        UPDATE t_order SET
+        order_status=#{status}
+        WHERE id = #{id}
+    </update>
+
+    <!--根据订单号查找订单-->
+    <select id="findOrderByOrderNo" resultType="com.kunlun.entity.Order">
+        SELECT * from t_order WHERE order_no = #{orderNo}
+    </select>
+
+    <!--修改订单状态和微信支付订单号-->
+    <update id="modifyOrderStatusAndWxOrderNo">
+        UPDATE t_order SET
+            order_status= #{status},
+            <if test="wxOrderNo!=null">
+                wx_order_no=#{wxOrderNo},
+            </if>
+           update_date = NOW()
+        WHERE id=#{id}
     </update>
 </mapper>

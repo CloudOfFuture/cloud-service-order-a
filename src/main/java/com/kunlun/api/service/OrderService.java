@@ -67,4 +67,20 @@ public interface OrderService {
      * @return
      */
     DataRet<String> modifyOrderStatus(Long id,String status);
+
+    /**
+     * 根据订单号查找订单
+     * @param orderNo
+     * @return
+     */
+    DataRet<Order> findByOrderNo(String orderNo);
+
+    /**
+     * 修改微信订单状态和微信支付订单号
+     * @param id
+     * @param status
+     * @param wxOrderNo
+     * @return
+     */
+    DataRet<String> modifyStatusAndWxOrderNo(Long id,String status,String wxOrderNo);
 }
