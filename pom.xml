@@ -44,10 +44,6 @@
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-eureka</artifactId>
 		</dependency>
-		<!--<dependency>-->
-		<!--<groupId>org.springframework.boot</groupId>-->
-		<!--<artifactId>spring-boot-starter-aop</artifactId>-->
-		<!--</dependency>-->
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-hystrix</artifactId>
@@ -87,22 +83,10 @@
 			<artifactId>druid</artifactId>
 			<version>1.0.27</version>
 		</dependency>
-		<!--分布式事务依赖-->
-		<!--<dependency>-->
-			<!--<groupId>com.codingapi</groupId>-->
-			<!--<artifactId>tx-client</artifactId>-->
-			<!--<version>4.0.1</version>-->
-		<!--</dependency>-->
-		<!--<dependency>-->
-			<!--<groupId>com.codingapi</groupId>-->
-			<!--<artifactId>tx-plugins-db</artifactId>-->
-			<!--<version>4.0.1</version>-->
-		<!--</dependency>-->
-		<!--<dependency>-->
-			<!--<groupId>com.codingapi</groupId>-->
-			<!--<artifactId>transaction-springcloud</artifactId>-->
-			<!--<version>4.0.1</version>-->
-		<!--</dependency>-->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-config</artifactId>
+		</dependency>
 	</dependencies>
 	<dependencyManagement>
 		<dependencies>
