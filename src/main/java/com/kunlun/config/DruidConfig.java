@@ -2,6 +2,7 @@ package com.kunlun.config;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import org.springframework.boot.bind.RelaxedPropertyResolver;
+import org.springframework.cloud.client.discovery.ManagementServerPortUtils;
 import org.springframework.context.EnvironmentAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,7 +15,6 @@ import org.springframework.core.env.Environment;
  */
 @Configuration
 public class DruidConfig implements EnvironmentAware {
-
 
     private RelaxedPropertyResolver relaxedPropertyResolver;
 
