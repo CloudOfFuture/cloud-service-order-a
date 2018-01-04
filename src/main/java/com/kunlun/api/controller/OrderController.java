@@ -39,11 +39,11 @@ public class OrderController {
      * @return
      */
     @GetMapping("/findByCondition")
-    public PageResult list(@RequestParam(value = "orderNo") String orderNo,
-                           @RequestParam(value = "phone") String phone,
-                           @RequestParam(value = "status") String status,
-                           @RequestParam(value = "type") String type,
-                           @RequestParam(value = "searchKey") String searchKey,
+    public PageResult list(@RequestParam(value = "orderNo",required = false) String orderNo,
+                           @RequestParam(value = "phone",required = false) String phone,
+                           @RequestParam(value = "status",required = false) String status,
+                           @RequestParam(value = "type",required = false) String type,
+                           @RequestParam(value = "searchKey",required = false) String searchKey,
                            @RequestParam(value = "pageNo") Integer pageNo,
                            @RequestParam(value = "pageSize") Integer pageSize) {
         return orderService.list(orderNo, phone, status, type, searchKey, pageNo, pageSize);
