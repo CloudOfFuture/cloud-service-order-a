@@ -30,7 +30,7 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
         return new RestTemplate();
     }
 
-    @Bean
+
     /**
      * 消息转换
      *
