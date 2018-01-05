@@ -55,7 +55,7 @@ public class WxOrderController {
      * @return
      */
     @GetMapping("/refund")
-    public DataRet<String> refund(@RequestParam(value = "order_id") Long orderId) {
+    public DataRet<String> refund(@RequestParam(value = "orderId") Long orderId) {
         return wxOrderService.refund(orderId);
     }
 

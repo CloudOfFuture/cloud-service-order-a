@@ -2,7 +2,9 @@ package com.kunlun.api.service;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.kunlun.api.client.DeliveryClient;
 import com.kunlun.api.mapper.WxOrderMapper;
+import com.kunlun.entity.Delivery;
 import com.kunlun.entity.Order;
 import com.kunlun.entity.OrderExt;
 import com.kunlun.enums.CommonEnum;
@@ -24,6 +26,9 @@ public class WxOrderServiceImpl implements WxOrderService {
 
     @Autowired
     private WxOrderMapper wxOrderMapper;
+
+    @Autowired
+    private DeliveryClient deliveryClient;
 
     /**
      * 订单列表
@@ -74,6 +79,7 @@ public class WxOrderServiceImpl implements WxOrderService {
         }
         Order order = wxOrderMapper.findById(orderId);
         //TODO 订单发货信息 订单收货地址
+        deliveryClient.findDetailById(order.getDeliveryId());
         if (order == null) {
             return new DataRet<>("ERROR", "订单不存在");
         }
@@ -146,8 +152,8 @@ public class WxOrderServiceImpl implements WxOrderService {
     @Override
     public DataRet<String> addOrder(Order order) {
         Integer res = wxOrderMapper.addOrder(order);
-        if(res<=0){
-            return new DataRet<String>("ERROR","下单失败");
+        if (res <= 0) {
+            return new DataRet<String>("ERROR", "下单失败");
         }
         return new DataRet<>("下单成功");
     }
@@ -161,9 +167,9 @@ public class WxOrderServiceImpl implements WxOrderService {
      */
     @Override
     public DataRet<String> updateOrderPrepayId(Long id, String prepayId) {
-        Integer result = wxOrderMapper.updatePrepayId(id,prepayId);
-        if(result<=0){
-            return new DataRet<>("ERROR","修改预付款订单号失败");
+        Integer result = wxOrderMapper.updatePrepayId(id, prepayId);
+        if (result <= 0) {
+            return new DataRet<>("ERROR", "修改预付款订单号失败");
         }
         return new DataRet<>("修改成功");
     }
