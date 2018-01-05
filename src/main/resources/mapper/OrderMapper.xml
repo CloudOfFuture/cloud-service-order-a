@@ -108,9 +108,14 @@
         </if>
     </select>
 
-    <!--退款-->
-    <update id="refund" parameterType="com.kunlun.entity.Order">
-        UPDATE t_order SET flag=#{flag},remark=#{remark},refund_fee=#{refundFee},update_date=NOW() WHERE id=#{orderId} AND seller_id=#{sellerId}
+    <!--审核退款-->
+    <update id="auditRefund">
+        UPDATE t_order
+        SET order_status=#{orderStatus},
+        remark=#{remark},
+        refund_fee=#{refundFee},
+        update_date=NOW()
+        WHERE id=#{orderId} AND seller_id=#{sellerId}
     </update>
 
     <!--修改订单状态-->
@@ -128,11 +133,11 @@
     <!--修改订单状态和微信支付订单号-->
     <update id="modifyOrderStatusAndWxOrderNo">
         UPDATE t_order SET
-            order_status= #{status},
-            <if test="wxOrderNo!=null">
-                wx_order_no=#{wxOrderNo},
-            </if>
-           update_date = NOW()
+        order_status= #{status},
+        <if test="wxOrderNo!=null">
+            wx_order_no=#{wxOrderNo},
+        </if>
+        update_date = NOW()
         WHERE id=#{id}
     </update>
 </mapper>

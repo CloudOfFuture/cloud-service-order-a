@@ -34,7 +34,7 @@ public interface WxOrderService {
      * @param orderId
      * @return
      */
-    DataRet<String> refund(Long orderId);
+    DataRet<String> applyRefund(Long orderId);
 
     /**
      * 查询订单详情

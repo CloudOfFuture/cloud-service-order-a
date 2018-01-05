@@ -61,9 +61,12 @@ public class WxOrderServiceImpl implements WxOrderService {
      * @return
      */
     @Override
-    public DataRet<String> refund(Long orderId) {
-        wxOrderMapper.refund(orderId);
-        return new DataRet<>("申请退款成功");
+    public DataRet<String> applyRefund(Long orderId) {
+        int result = wxOrderMapper.applyRefund(orderId);
+        if (result > 0) {
+            return new DataRet<>("申请退款成功");
+        }
+        return new DataRet<>("ERROR", "申请退款失败");
     }
 
     /**

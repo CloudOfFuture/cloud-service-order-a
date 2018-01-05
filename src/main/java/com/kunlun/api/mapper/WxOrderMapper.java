@@ -6,6 +6,8 @@ import com.kunlun.entity.OrderExt;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 /**
  * @author by kunlun
  * @version <0.1>
@@ -40,7 +42,7 @@ public interface WxOrderMapper {
      * @param orderId
      * @return
      */
-    int refund(@Param("orderId") Long orderId);
+    int applyRefund(@Param("orderId") Long orderId);
 
     /**
      * 更新订单状态
@@ -54,6 +56,7 @@ public interface WxOrderMapper {
 
     /**
      * 新增订单
+     *
      * @param order
      * @return
      */
@@ -61,9 +64,28 @@ public interface WxOrderMapper {
 
     /**
      * 修改订单预付款订单号
+     *
      * @param id
      * @param prepayId
      * @return
      */
-    int updatePrepayId(@Param("id") Long id,@Param("prepayId") String prepayId);
+    int updatePrepayId(@Param("id") Long id, @Param("prepayId") String prepayId);
+
+    /**
+     * 查询退款中的订单
+     *
+     * @return
+     */
+    List<Order> findRefundingOrder();
+
+    /**
+     * 修改订单状态
+     *
+     * @param id     Long
+     * @param status String
+     */
+    void updateOrderStatusById(@Param("id") Long id,
+                               @Param("status") String status);
+
+    List<Order> findUnPayOrder();
 }

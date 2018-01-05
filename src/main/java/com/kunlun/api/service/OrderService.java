@@ -54,22 +54,28 @@ public interface OrderService {
     DataRet<Order> findById(Long orderId, Long sellerId);
 
     /**
-     * 退款
-     * @param order
+     * 退款审核
+     *
+     * @param orderId
+     * @param flag AGREE 同意  REFUSE  拒绝
+     * @param remark
+     * @param refundFee
      * @return
      */
-    DataRet<String> refund(Order order);
+    DataRet<String> auditRefund(Long orderId, String flag, String remark, Integer refundFee);
 
     /**
      * 修改订单装态
+     *
      * @param id
      * @param status
      * @return
      */
-    DataRet<String> modifyOrderStatus(Long id,String status);
+    DataRet<String> modifyOrderStatus(Long id, String status);
 
     /**
      * 根据订单号查找订单
+     *
      * @param orderNo
      * @return
      */
@@ -77,10 +83,11 @@ public interface OrderService {
 
     /**
      * 修改微信订单状态和微信支付订单号
+     *
      * @param id
      * @param status
      * @param wxOrderNo
      * @return
      */
-    DataRet<String> modifyStatusAndWxOrderNo(Long id,String status,String wxOrderNo);
+    DataRet<String> modifyStatusAndWxOrderNo(Long id, String status, String wxOrderNo);
 }
