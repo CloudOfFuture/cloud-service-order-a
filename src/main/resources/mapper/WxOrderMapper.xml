@@ -83,7 +83,7 @@
     </select>
 
     <!--申请退款-->
-    <update id="refund" parameterType="com.kunlun.entity.Order">
+    <update id="applyRefund" parameterType="com.kunlun.entity.Order">
         UPDATE t_order SET order_status='REFUNDING' , refund_date=NOW() WHERE id=#{orderId}
     </update>
 

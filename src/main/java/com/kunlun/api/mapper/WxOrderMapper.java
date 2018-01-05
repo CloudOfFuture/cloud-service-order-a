@@ -42,7 +42,7 @@ public interface WxOrderMapper {
      * @param orderId
      * @return
      */
-    int refund(@Param("orderId") Long orderId);
+    int applyRefund(@Param("orderId") Long orderId);
 
     /**
      * 更新订单状态

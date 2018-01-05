@@ -51,12 +51,12 @@ public class WxOrderController {
     /**
      * 申请退款/退款金额
      *
-     * @param orderId   订单id
+     * @param orderId 订单id
      * @return
      */
-    @GetMapping("/refund")
-    public DataRet<String> refund(@RequestParam(value = "order_id") Long orderId) {
-        return wxOrderService.refund(orderId);
+    @GetMapping("/applyRefund")
+    public DataRet<String> applyRefund(@RequestParam(value = "orderId") Long orderId) {
+        return wxOrderService.applyRefund(orderId);
     }
 
     /**
@@ -100,24 +100,26 @@ public class WxOrderController {
 
     /**
      * 新增订单
+     *
      * @param order
      * @return
      */
     @PostMapping("/addOrder")
-    public DataRet<String> addOrder(@RequestBody Order order){
+    public DataRet<String> addOrder(@RequestBody Order order) {
         return wxOrderService.addOrder(order);
     }
 
     /**
      * 修改订单预付款订单号
+     *
      * @param id
      * @param prepayId
      * @return
      */
     @PostMapping("/updatePrepayId")
     public DataRet<String> updateOrderPrepayId(@RequestParam(value = "id") Long id,
-                                               @RequestParam(value = "prepayId") String prepayId){
-        return wxOrderService.updateOrderPrepayId(id,prepayId);
+                                               @RequestParam(value = "prepayId") String prepayId) {
+        return wxOrderService.updateOrderPrepayId(id, prepayId);
     }
 
 }

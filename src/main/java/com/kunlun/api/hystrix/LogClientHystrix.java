@@ -1,5 +1,6 @@
 package com.kunlun.api.hystrix;
 
+import com.alibaba.fastjson.JSONArray;
 import com.kunlun.api.client.LogClient;
 import com.kunlun.entity.GoodLog;
 import com.kunlun.entity.OrderLog;
@@ -26,6 +27,11 @@ public class LogClientHystrix implements LogClient {
 
     @Override
     public DataRet<String> addPointLog(PointLog pointLog) {
+        return new DataRet<>("ERROR", "请求失败");
+    }
+
+    @Override
+    public DataRet<String> addPointLogList(JSONArray jsonArray) {
         return new DataRet<>("ERROR", "请求失败");
     }
 }

@@ -39,11 +39,11 @@ public class OrderController {
      * @return
      */
     @GetMapping("/findByCondition")
-    public PageResult list(@RequestParam(value = "orderNo",required = false) String orderNo,
-                           @RequestParam(value = "phone",required = false) String phone,
-                           @RequestParam(value = "status",required = false) String status,
-                           @RequestParam(value = "type",required = false) String type,
-                           @RequestParam(value = "searchKey",required = false) String searchKey,
+    public PageResult list(@RequestParam(value = "orderNo", required = false) String orderNo,
+                           @RequestParam(value = "phone", required = false) String phone,
+                           @RequestParam(value = "status", required = false) String status,
+                           @RequestParam(value = "type", required = false) String type,
+                           @RequestParam(value = "searchKey", required = false) String searchKey,
                            @RequestParam(value = "pageNo") Integer pageNo,
                            @RequestParam(value = "pageSize") Integer pageSize) {
         return orderService.list(orderNo, phone, status, type, searchKey, pageNo, pageSize);
@@ -86,41 +86,49 @@ public class OrderController {
 
     /**
      * 根据订单编号查找订单
+     *
      * @param orderNo
      * @return
      */
     @GetMapping("/findByOrderNo")
-    public DataRet<Order> findByOrderNo(@RequestParam(value = "orderNo") String orderNo){
+    public DataRet<Order> findByOrderNo(@RequestParam(value = "orderNo") String orderNo) {
         return orderService.findByOrderNo(orderNo);
     }
 
     /**
      * 退款
      *
-     * @param order
-     * @return
+     * @param orderId   Long
+     * @param flag      AGREE 同意  REFUSE  拒绝
+     * @param remark    String
+     * @param refundFee Integer
+     * @return DataRet
      */
-    @PostMapping("/refund")
-    public DataRet<String> refund(@RequestBody Order order) {
-        return orderService.refund(order);
+    @PostMapping("/audit/refund")
+    public DataRet<String> auditRefund(@RequestParam("orderId") Long orderId,
+                                       @RequestParam("flag") String flag,
+                                       @RequestParam(value = "remark", required = false) String remark,
+                                       @RequestParam(value = "refundFee") Integer refundFee) {
+        return orderService.auditRefund(orderId, flag, remark, refundFee);
     }
 
     /**
      * 修改订单状态
+     *
      * @param id
      * @param status
      * @return
      */
     @PostMapping("/modifyStatus")
-    public DataRet<String> modifyOrderById(@RequestParam(value = "id")Long id,
-                                           @RequestParam(value = "status") String status){
-        return orderService.modifyOrderStatus(id,status);
+    public DataRet<String> modifyOrderById(@RequestParam(value = "id") Long id,
+                                           @RequestParam(value = "status") String status) {
+        return orderService.modifyOrderStatus(id, status);
     }
 
     @PostMapping("/modifyStatusAndPayOrderNo")
     public DataRet<String> modifyStatusAndPayOrderNo(@RequestParam(value = "id") Long id,
-                                                     @RequestParam(value = "status")String status,
-                                                     @RequestParam(value = "wxOrderNo") String wxOrderNo){
-        return  orderService.modifyStatusAndWxOrderNo(id,status,wxOrderNo);
+                                                     @RequestParam(value = "status") String status,
+                                                     @RequestParam(value = "wxOrderNo") String wxOrderNo) {
+        return orderService.modifyStatusAndWxOrderNo(id, status, wxOrderNo);
     }
 }

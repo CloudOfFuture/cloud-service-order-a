@@ -87,15 +87,17 @@ public interface OrderMapper {
 
     /**
      * 修改订单状态
+     *
      * @param id
      * @param status
      * @return
      */
-    int modifyOrderStatus(@Param("id") Long id,@Param("status") String status);
+    int modifyOrderStatus(@Param("id") Long id, @Param("status") String status);
 
 
     /**
      * 根据微信订单号查找订单
+     *
      * @param orderNo
      * @return
      */
@@ -103,6 +105,7 @@ public interface OrderMapper {
 
     /**
      * 修改订单状态和微信支付订单号
+     *
      * @param id
      * @param status
      * @param wxOrderNo
@@ -111,4 +114,26 @@ public interface OrderMapper {
     int modifyOrderStatusAndWxOrderNo(@Param("id") Long id,
                                       @Param("status") String status,
                                       @Param("wxOrderNo") String wxOrderNo);
+
+    /**
+     * 根据id查询详情
+     *
+     * @param id
+     * @return
+     */
+    Order findById(@Param("id") Long id);
+
+    /**
+     * 退款审核
+     *
+     * @param orderId
+     * @param orderStatus
+     * @param refundFree
+     * @param remark
+     * @return int
+     */
+    int auditRefund(@Param("orderId") Long orderId,
+                    @Param("orderStatus") String orderStatus,
+                    @Param("refundFree") Integer refundFree,
+                    @Param("remark") String remark);
 }

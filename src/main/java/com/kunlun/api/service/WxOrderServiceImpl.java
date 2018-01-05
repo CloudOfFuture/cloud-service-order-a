@@ -56,9 +56,12 @@ public class WxOrderServiceImpl implements WxOrderService {
      * @return
      */
     @Override
-    public DataRet<String> refund(Long orderId) {
-        wxOrderMapper.refund(orderId);
-        return new DataRet<>("申请退款成功");
+    public DataRet<String> applyRefund(Long orderId) {
+        int result = wxOrderMapper.applyRefund(orderId);
+        if (result > 0) {
+            return new DataRet<>("申请退款成功");
+        }
+        return new DataRet<>("ERROR", "申请退款失败");
     }
 
     /**
@@ -146,8 +149,8 @@ public class WxOrderServiceImpl implements WxOrderService {
     @Override
     public DataRet<String> addOrder(Order order) {
         Integer res = wxOrderMapper.addOrder(order);
-        if(res<=0){
-            return new DataRet<String>("ERROR","下单失败");
+        if (res <= 0) {
+            return new DataRet<String>("ERROR", "下单失败");
         }
         return new DataRet<>("下单成功");
     }
@@ -161,9 +164,9 @@ public class WxOrderServiceImpl implements WxOrderService {
      */
     @Override
     public DataRet<String> updateOrderPrepayId(Long id, String prepayId) {
-        Integer result = wxOrderMapper.updatePrepayId(id,prepayId);
-        if(result<=0){
-            return new DataRet<>("ERROR","修改预付款订单号失败");
+        Integer result = wxOrderMapper.updatePrepayId(id, prepayId);
+        if (result <= 0) {
+            return new DataRet<>("ERROR", "修改预付款订单号失败");
         }
         return new DataRet<>("修改成功");
     }

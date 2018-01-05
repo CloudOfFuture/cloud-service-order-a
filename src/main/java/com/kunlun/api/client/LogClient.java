@@ -1,5 +1,6 @@
 package com.kunlun.api.client;
 
+import com.alibaba.fastjson.JSONArray;
 import com.kunlun.api.hystrix.LogClientHystrix;
 import com.kunlun.entity.GoodLog;
 import com.kunlun.entity.OrderLog;
@@ -13,11 +14,12 @@ import org.springframework.web.bind.annotation.RequestBody;
  * @author by hws
  * @created on 2017/12/26.
  */
-@FeignClient(value = "cloud-service-log",fallback = LogClientHystrix.class)
+@FeignClient(value = "cloud-service-log", fallback = LogClientHystrix.class)
 public interface LogClient {
 
     /**
      * 创建订单日志
+     *
      * @param orderLog
      * @return
      */
@@ -26,6 +28,7 @@ public interface LogClient {
 
     /**
      * 创建商品日志
+     *
      * @param goodLog
      * @return
      */
@@ -34,9 +37,20 @@ public interface LogClient {
 
     /**
      * 创建积分日志
+     *
      * @param pointLog
      * @return
      */
     @PostMapping("/log/add/pointLog")
     DataRet<String> addPointLog(@RequestBody PointLog pointLog);
+
+    /**
+     * 创建积分日志
+     *
+     * @param jsonArray JSONArray
+     * @return
+     */
+    @PostMapping("/log/add/pointLogs")
+    DataRet<String> addPointLogList(@RequestBody JSONArray jsonArray);
+
 }
