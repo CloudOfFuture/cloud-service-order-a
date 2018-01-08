@@ -39,6 +39,9 @@ public class OrderScheduler {
     @Scheduled(fixedRate = 2 * 60 * 1000)
     public void refundingOrder() {
         List<Order> orderList = wxOrderMapper.findRefundingOrder();
+        if (orderList == null || orderList.size() == 0) {
+            return;
+        }
         orderList.forEach(this::refund);
     }
 
@@ -66,7 +69,6 @@ public class OrderScheduler {
             //记录退款日志
             orderLog = CommonUtil.constructOrderLog(order.getOrderNo(), responseData.getReturn_msg(),
                     null, order.getId());
-
         } else {
             //记录退款失败日志
             orderLog = CommonUtil.constructOrderLog(order.getOrderNo(), "微信退款失败",
@@ -78,7 +80,8 @@ public class OrderScheduler {
     /**
      * 查询未付款订单，校验微信支付结果
      */
-    @Scheduled(fixedRate = 4 * 60 * 60 * 1000)
+//    @Scheduled(fixedRate = 4 * 60 * 60 * 1000)
+    @Scheduled(fixedRate =1 * 60 * 1000)
     public void findUnPayOrder() {
         List<Order> page = wxOrderMapper.findUnPayOrder();
         if (page == null || page.size() == 0) {
@@ -116,24 +119,17 @@ public class OrderScheduler {
         String param = XmlUtil.mapConvertToXML(data);
         String result = WxUtil.httpsRequest(WxPayConstant.WECHAT_ORDER_QUERY_URL, "POST", param);
         OrderQueryResponseData response = XmlUtil.castXMLStringToOrderQueryResponseData(result);
-        updateLocalStatus(orderId, response);
-    }
 
-    /**
-     * @param orderId  订单id
-     * @param response 微信返回
-     */
-    private void updateLocalStatus(Long orderId, OrderQueryResponseData response) {
         if (orderId == null || response.getTrade_state() == null) {
             return;
         }
         if (CommonEnum.SUCCESS.getCode().equals(response.getTrade_state())) {
             //SUCCESS—支付成功
-            UnifiedOrderNotifyRequestData data = new UnifiedOrderNotifyRequestData();
-            data.setTransaction_id(response.getTransaction_id());
-            data.setOut_trade_no(response.getOut_trade_no());
-            data.setTime_end(response.getTime_end());
-            payClient.callback(data);
+            UnifiedOrderNotifyRequestData requestData = new UnifiedOrderNotifyRequestData();
+            requestData.setTransaction_id(response.getTransaction_id());
+            requestData.setOut_trade_no(response.getOut_trade_no());
+            requestData.setTime_end(response.getTime_end());
+            payClient.callback(requestData);
         }
     }
 }
