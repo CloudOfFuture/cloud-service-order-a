@@ -24,7 +24,7 @@ import java.util.List;
  * @created on 2017/12/20.
  */
 @RestController
-@RequestMapping("wx/order")
+@RequestMapping("/wx/order")
 public class WxOrderController {
 
     @Autowired
