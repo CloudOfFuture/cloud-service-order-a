@@ -184,15 +184,6 @@
         AND UNIX_TIMESTAMP(now()) - UNIX_TIMESTAMP(refund_date) > 60*10
     </select>
 
-    <!--修改订单状态-->
-    <update id="updateOrderStatusById">
-        UPDATE t_order SET
-        order_status=#{orderStatus},
-        update_date=NOW()
-        WHERE id=#{id}
-    </update>
-
-
     <!--查询4-24小时内未支付的订单列表 UNIX_TIMESTAMP秒  60*60*4 -->
     <select id="findUnPayOrder" resultType="com.kunlun.entity.Order">
         SELECT

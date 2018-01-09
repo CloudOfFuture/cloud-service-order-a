@@ -119,7 +119,7 @@
     </update>
 
     <!--修改订单状态-->
-    <update id="modifyOrderStatus">
+    <update id="updateOrderStatus">
         UPDATE t_order SET
         order_status=#{status}
         WHERE id = #{id}

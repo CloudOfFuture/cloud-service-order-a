@@ -16,6 +16,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 /**
  * @author by kunlun
  * @version <0.1>
@@ -175,5 +177,24 @@ public class WxOrderServiceImpl implements WxOrderService {
             return new DataRet<>("ERROR", "修改预付款订单号失败");
         }
         return new DataRet<>("修改成功");
+    }
+
+
+    @Override
+    public DataRet<List<Order>> findUnPayOrder() {
+        List<Order> result = wxOrderMapper.findUnPayOrder();
+        if (result == null || result.size() == 0) {
+            return new DataRet<>("ERROR", "暂无数据");
+        }
+        return new DataRet<>(result);
+    }
+
+    @Override
+    public DataRet<List<Order>> findRefundingOrder() {
+        List<Order> result = wxOrderMapper.findRefundingOrder();
+        if (result == null || result.size() == 0) {
+            return new DataRet<>("ERROR", "暂无数据");
+        }
+        return new DataRet<>(result);
     }
 }

@@ -5,6 +5,8 @@ import com.kunlun.result.DataRet;
 import com.kunlun.result.PageResult;
 import com.kunlun.wxentity.OrderCondition;
 
+import java.util.List;
+
 /**
  * @author by kunlun
  * @version <0.1>
@@ -57,7 +59,7 @@ public interface OrderService {
      * 退款审核
      *
      * @param orderId
-     * @param flag AGREE 同意  REFUSE  拒绝
+     * @param flag      AGREE 同意  REFUSE  拒绝
      * @param remark
      * @param refundFee
      * @return
@@ -71,7 +73,7 @@ public interface OrderService {
      * @param status
      * @return
      */
-    DataRet<String> modifyOrderStatus(Long id, String status);
+    DataRet<String> updateOrderStatus(Long id, String status);
 
     /**
      * 根据订单号查找订单
@@ -90,4 +92,5 @@ public interface OrderService {
      * @return
      */
     DataRet<String> modifyStatusAndWxOrderNo(Long id, String status, String wxOrderNo);
+
 }

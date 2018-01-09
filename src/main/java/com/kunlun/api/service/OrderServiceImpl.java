@@ -202,8 +202,8 @@ public class OrderServiceImpl implements OrderService {
      * @return
      */
     @Override
-    public DataRet<String> modifyOrderStatus(Long id, String status) {
-        Integer result = orderMapper.modifyOrderStatus(id, status);
+    public DataRet<String> updateOrderStatus(Long id, String status) {
+        Integer result = orderMapper.updateOrderStatus(id, status);
         if (result <= 0) {
             return new DataRet<>("ERROR", "修改订单状态失败");
         }
@@ -241,6 +241,4 @@ public class OrderServiceImpl implements OrderService {
         }
         return new DataRet<>("操作成功");
     }
-
-
 }
