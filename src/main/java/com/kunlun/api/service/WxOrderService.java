@@ -42,7 +42,7 @@ public interface WxOrderService {
      * @param orderId
      * @return
      */
-    DataRet<Order> findById(Long orderId);
+    DataRet<OrderExt> findById(Long orderId);
 
     /**
      * 确认收货

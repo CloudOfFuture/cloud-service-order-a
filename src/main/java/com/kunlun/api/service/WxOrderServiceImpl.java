@@ -7,6 +7,7 @@ import com.kunlun.api.mapper.WxOrderMapper;
 import com.kunlun.entity.Delivery;
 import com.kunlun.entity.Order;
 import com.kunlun.entity.OrderExt;
+import com.kunlun.entity.SendCood;
 import com.kunlun.enums.CommonEnum;
 import com.kunlun.result.DataRet;
 import com.kunlun.result.PageResult;
@@ -76,17 +77,18 @@ public class WxOrderServiceImpl implements WxOrderService {
      * @return
      */
     @Override
-    public DataRet<Order> findById(Long orderId) {
+    public DataRet<OrderExt> findById(Long orderId) {
         if (orderId == null) {
             return new DataRet<>("ERROR", "传入的参数有误");
         }
-        Order order = wxOrderMapper.findById(orderId);
-        //TODO 订单发货信息 订单收货地址
-        deliveryClient.findDetailById(order.getDeliveryId());
-        if (order == null) {
+        //TODO 订单发货信息
+        OrderExt orderExt = wxOrderMapper.findById(orderId);
+        DataRet deliveryRet = deliveryClient.findDetailById(orderExt.getDeliveryId());
+        orderExt.setDelivery((Delivery) deliveryRet.getBody());
+        if (orderExt == null) {
             return new DataRet<>("ERROR", "订单不存在");
         }
-        return new DataRet<>(order);
+        return new DataRet<>(orderExt);
     }
 
     /**

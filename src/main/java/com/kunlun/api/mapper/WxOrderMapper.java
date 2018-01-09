@@ -34,7 +34,7 @@ public interface WxOrderMapper {
      * @param orderId
      * @return
      */
-    Order findById(@Param("orderId") Long orderId);
+    OrderExt findById(@Param("orderId") Long orderId);
 
     /**
      * 申请退款

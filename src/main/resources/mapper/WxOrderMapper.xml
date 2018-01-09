@@ -37,25 +37,25 @@
     </select>
 
     <!--查询订单详情-->
-    <select id="findById" resultType="com.kunlun.entity.Order">
+    <select id="findById" resultType="com.kunlun.entity.OrderExt">
         SELECT id,
             seller_id,
             user_id,
             order_no,
+            delivery_id,
             good_snapshot_id,
             delivery_no,
-            delivery_id,
             order_status,
             order_type,
             pay_type,
             message,
-            recipients,
             phone,
             province,
             city,
             area,
             address,
             post_code,
+            recipients,
             good_name,
             count,
             wx_order_no,

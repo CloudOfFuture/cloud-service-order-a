@@ -23,7 +23,7 @@ import javax.servlet.http.HttpServletRequest;
  * @created on 2017/12/20.
  */
 @RestController
-@RequestMapping("/wx/order")
+@RequestMapping("wx/order")
 public class WxOrderController {
 
     @Autowired
@@ -66,7 +66,7 @@ public class WxOrderController {
      * @return
      */
     @GetMapping("/findById")
-    public DataRet<Order> findById(@RequestParam(value = "orderId") Long orderId) {
+    public DataRet<OrderExt> findById(@RequestParam(value = "orderId") Long orderId) {
         return wxOrderService.findById(orderId);
     }
 
