@@ -12,6 +12,8 @@ import com.kunlun.result.DataRet;
 import com.kunlun.result.PageResult;
 import com.kunlun.utils.WxUtil;
 import com.mysql.jdbc.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
