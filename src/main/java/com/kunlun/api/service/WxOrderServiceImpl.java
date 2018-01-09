@@ -8,6 +8,7 @@ import com.kunlun.api.mapper.WxOrderMapper;
 import com.kunlun.entity.Delivery;
 import com.kunlun.entity.Order;
 import com.kunlun.entity.OrderExt;
+import com.kunlun.entity.OrderLog;
 import com.kunlun.enums.CommonEnum;
 import com.kunlun.result.DataRet;
 import com.kunlun.result.PageResult;
