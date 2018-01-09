@@ -14,13 +14,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 /**
  * @author by kunlun
  * @version <0.1>
  * @created on 2017/12/20.
  */
 @RestController
-@RequestMapping("/backend/order")
+@RequestMapping("backend/order")
 public class OrderController {
 
     @Autowired
@@ -119,10 +121,10 @@ public class OrderController {
      * @param status
      * @return
      */
-    @PostMapping("/modifyStatus")
-    public DataRet<String> modifyOrderById(@RequestParam(value = "id") Long id,
-                                           @RequestParam(value = "status") String status) {
-        return orderService.modifyOrderStatus(id, status);
+    @PostMapping("/updateStatusById")
+    public DataRet<String> updateOrderStatusById(@RequestParam(value = "id") Long id,
+                                                 @RequestParam(value = "status") String status) {
+        return orderService.updateOrderStatus(id, status);
     }
 
     @PostMapping("/modifyStatusAndPayOrderNo")

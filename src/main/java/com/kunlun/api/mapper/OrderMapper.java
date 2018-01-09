@@ -92,7 +92,7 @@ public interface OrderMapper {
      * @param status
      * @return
      */
-    int modifyOrderStatus(@Param("id") Long id, @Param("status") String status);
+    int updateOrderStatus(@Param("id") Long id, @Param("status") String status);
 
 
     /**

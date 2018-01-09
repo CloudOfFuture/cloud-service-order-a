@@ -78,14 +78,6 @@ public interface WxOrderMapper {
      */
     List<Order> findRefundingOrder();
 
-    /**
-     * 修改订单状态
-     *
-     * @param id     Long
-     * @param status String
-     */
-    void updateOrderStatusById(@Param("id") Long id,
-                               @Param("status") String status);
 
     List<Order> findUnPayOrder();
 }

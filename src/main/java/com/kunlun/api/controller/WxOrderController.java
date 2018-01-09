@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * @author by kunlun
@@ -122,4 +123,15 @@ public class WxOrderController {
         return wxOrderService.updateOrderPrepayId(id, prepayId);
     }
 
+
+
+    @GetMapping("/findRefundingOrder")
+    public DataRet<List<Order>> findRefundingOrder() {
+        return wxOrderService.findRefundingOrder();
+    }
+
+    @GetMapping("/findUnPayOrder")
+    public DataRet<List<Order>> findUnPayOrder() {
+        return wxOrderService.findUnPayOrder();
+    }
 }

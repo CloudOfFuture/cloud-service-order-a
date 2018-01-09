@@ -8,6 +8,7 @@ import com.kunlun.wxentity.OrderCondition;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * @author by kunlun
@@ -75,4 +76,20 @@ public interface WxOrderService {
      * @return
      */
     DataRet<String> updateOrderPrepayId(Long id,String prepayId);
+
+
+    /**
+     * 查询未支付订单
+     *
+     * @return List<Order>
+     */
+    DataRet<List<Order>> findUnPayOrder();
+
+    /**
+     * 未退款订单列表
+     *
+     * @return List<Order>
+     */
+    DataRet<List<Order>> findRefundingOrder();
+
 }
