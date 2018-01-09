@@ -75,27 +75,25 @@ public class WxOrderController {
      * 确认收货
      *
      * @param orderId 订单id
-     * @param request 请求ip
+     * @param ipAddress 请求ip
      * @return
      */
-    @GetMapping("/confirmByGood")
-    public DataRet<String> confirmByGood(@RequestParam(value = "order_id") Long orderId,
-                                         HttpServletRequest request) {
-        String ipAddress = IpUtil.getIPAddress(request);
+    @PostMapping("/confirmByGood")
+    public DataRet<String> confirmByGood(@RequestParam(value = "orderId") Long orderId,
+                                         @RequestParam(value = "ipAddress") String ipAddress) {
         return wxOrderService.confirmByGood(orderId, ipAddress);
     }
 
     /**
      * 取消订单
      *
-     * @param orderId 订单id
-     * @param request 请求ip
+     * @param orderId   订单id
+     * @param ipAddress 请求ip
      * @return
      */
-    @GetMapping("/cancelByOrder")
-    public DataRet<String> cancelByOrder(@RequestParam(value = "order_id") Long orderId,
-                                         HttpServletRequest request) {
-        String ipAddress = IpUtil.getIPAddress(request);
+    @PostMapping("/cancelByOrder")
+    public DataRet<String> cancelByOrder(@RequestParam(value = "orderId") Long orderId,
+                                         @RequestParam(value = "ipAddress") String ipAddress) {
         return wxOrderService.cancelByOrder(orderId, ipAddress);
     }
 
@@ -122,7 +120,6 @@ public class WxOrderController {
                                                @RequestParam(value = "prepayId") String prepayId) {
         return wxOrderService.updateOrderPrepayId(id, prepayId);
     }
-
 
 
     @GetMapping("/findRefundingOrder")
