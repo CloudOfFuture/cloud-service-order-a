@@ -5,7 +5,9 @@ import com.github.pagehelper.PageHelper;
 import com.kunlun.api.client.DeliveryClient;
 import com.kunlun.api.client.LogClient;
 import com.kunlun.api.mapper.WxOrderMapper;
-import com.kunlun.entity.*;
+import com.kunlun.entity.Delivery;
+import com.kunlun.entity.Order;
+import com.kunlun.entity.OrderExt;
 import com.kunlun.enums.CommonEnum;
 import com.kunlun.result.DataRet;
 import com.kunlun.result.PageResult;
@@ -14,7 +16,6 @@ import com.kunlun.utils.WxUtil;
 import com.mysql.jdbc.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
