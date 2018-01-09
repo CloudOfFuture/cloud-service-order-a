@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @created on 2017/12/20.
  */
 @RestController
-@RequestMapping("/backend/order")
+@RequestMapping("backend/order")
 public class OrderController {
 
     @Autowired
