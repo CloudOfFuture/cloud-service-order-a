@@ -34,7 +34,7 @@ public class OrderController {
      * @param orderNo
      * @param phone
      * @param status
-     * @param type
+     * @param orderType
      * @param searchKey
      * @param pageNo
      * @param pageSize
@@ -44,11 +44,11 @@ public class OrderController {
     public PageResult list(@RequestParam(value = "orderNo", required = false) String orderNo,
                            @RequestParam(value = "phone", required = false) String phone,
                            @RequestParam(value = "status", required = false) String status,
-                           @RequestParam(value = "type", required = false) String type,
+                           @RequestParam(value = "orderType", required = false) String orderType,
                            @RequestParam(value = "searchKey", required = false) String searchKey,
                            @RequestParam(value = "pageNo") Integer pageNo,
                            @RequestParam(value = "pageSize") Integer pageSize) {
-        return orderService.list(orderNo, phone, status, type, searchKey, pageNo, pageSize);
+        return orderService.list(orderNo, phone, status, orderType, searchKey, pageNo, pageSize);
     }
 
     /**

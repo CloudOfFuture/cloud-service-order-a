@@ -4,27 +4,19 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.kunlun.api.mapper.OrderMapper">
 
+    <!--订单列表-->
     <select id="list" resultType="com.kunlun.entity.Order">
         SELECT tor.id,
-        tor.user_id,
         tor.seller_id,
-        tor.use_point,
+        tor.user_id,
         tor.order_no,
         tor.good_snapshot_id,
+        tor.delivery_no,
         tor.delivery_id,
         tor.order_status,
         tor.order_type,
         tor.pay_type,
         tor.message,
-        tor.order_fee,
-        tor.reduce_fee,
-        tor.payment_fee,
-        tor.good_fee,
-        tor.freight_fee,
-        tor.create_date,
-        tor.pay_date,
-        tor.delivery_date,
-        tor.update_date,
         tor.recipients,
         tor.phone,
         tor.province,
@@ -34,19 +26,38 @@
         tor.post_code,
         tor.good_name,
         tor.count,
-        tor.prepay_id,
         tor.wx_order_no,
+        tor.create_date,
+        tor.pay_date,
+        tor.delivery_date,
         tor.good_id,
-        tor.remark,
         tor.use_ticket,
         tor.ticket_id,
-        tor.operate_point,
+        tor.prepay_id,
+        tor.remark,
+        tor.refund_date,
+        tor.update_date,
+        tor.freight_fee,
+        tor.good_fee,
+        tor.payment_fee,
+        tor.reduce_fee,
+        tor.order_fee,
+        tor.refund_fee,
         tor.send_good_id,
-        tor.delivery_no,
+        tor.operate_point,
+        tor.use_point,
         tg.good_no as goodNo,
         tg.main_image_url as goodMainImage
         FROM t_order tor
         LEFT JOIN t_good_snapshot tg ON tor.good_snapshot_id=tg.id
+        WHERE 1=1
+        <if test="searchKey!=null and searchKey!=''">
+            AND CONCAT_WS('',tor.order_status,tor.order_type,tor.recipients,tor.good_name) LIKE #{searchKey}
+        </if>
+        <if test="orderNo!=null and orderNo!=''">AND tor.order_No=#{orderNo}</if>
+        <if test="phone!=null and phone!=''">AND tor.phone=#{phone}</if>
+        <if test="status!=null and status!=''">AND tor.status=#{status}</if>
+        <if test="orderType!=null and orderType!=''">AND tor.order_type=#{orderType}</if>
     </select>
 
     <update id="modify">

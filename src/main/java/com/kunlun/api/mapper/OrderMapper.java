@@ -19,14 +19,14 @@ public interface OrderMapper {
      * @param orderNo
      * @param phone
      * @param status
-     * @param type
+     * @param orderType
      * @param searchKey
      * @return
      */
     Page<Order> list(@Param("orderNo") String orderNo,
                      @Param("phone") String phone,
                      @Param("status") String status,
-                     @Param("type") String type,
+                     @Param("orderType") String orderType,
                      @Param("searchKey") String searchKey);
 
     /**
