@@ -34,12 +34,12 @@ public interface OrderMapper {
      *
      * @param orderId
      * @param sellerId
-     * @param status
+     * @param orderStatus
      * @return
      */
     Order findByOrderIdAndSellerId(@Param("orderId") Long orderId,
                                    @Param("sellerId") Long sellerId,
-                                   @Param("status") String status);
+                                   @Param("orderStatus") String orderStatus);
 
     /**
      * 根据订单id更新订单状态 以及发货信息
@@ -107,12 +107,12 @@ public interface OrderMapper {
      * 修改订单状态和微信支付订单号
      *
      * @param id
-     * @param status
+     * @param orderStatus
      * @param wxOrderNo
      * @return
      */
     int modifyOrderStatusAndWxOrderNo(@Param("id") Long id,
-                                      @Param("status") String status,
+                                      @Param("orderStatus") String orderStatus,
                                       @Param("wxOrderNo") String wxOrderNo);
 
     /**

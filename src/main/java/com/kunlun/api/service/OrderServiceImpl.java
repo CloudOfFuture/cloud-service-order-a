@@ -82,7 +82,10 @@ public class OrderServiceImpl implements OrderService {
         if (null == order) {
             return new DataRet<>("ERROR", "订单不存在");
         }
-
+        Integer result = orderMapper.modifyOrderStatusAndWxOrderNo(orderId, CommonEnum.UN_RECEIVE.getCode(), null);
+        if (result < 0) {
+            return new DataRet<>("ERROR", "发货成功，但未修改订单状态");
+        }
         return new DataRet<>(order.getOrderNo());
     }
 

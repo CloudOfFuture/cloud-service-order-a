@@ -113,9 +113,9 @@
         tg.main_image_url as goodMainImage
         FROM t_order tor
         LEFT JOIN t_good_snapshot tg ON tor.good_snapshot_id=tg.id
-        WHERE tor.id=#{oderId} AND tor.seller_id=#{sellerId}
-        <if test="status!=null and status!=''">
-            AND tor.order_status=#{status}
+        WHERE tor.id=#{orderId} AND tor.seller_id=#{sellerId}
+        <if test="orderStatus!=null and orderStatus!=''">
+            AND tor.order_status=#{orderStatus}
         </if>
     </select>
 
@@ -144,7 +144,7 @@
     <!--修改订单状态和微信支付订单号-->
     <update id="modifyOrderStatusAndWxOrderNo">
         UPDATE t_order SET
-        order_status= #{status},
+        order_status= #{orderStatus},
         <if test="wxOrderNo!=null">
             wx_order_no=#{wxOrderNo},
         </if>
