@@ -82,7 +82,7 @@ public class OrderController {
      */
     @GetMapping("/findById")
     public DataRet<Order> findById(@RequestParam(value = "orderId") Long orderId,
-                                   @RequestHeader Long sellerId) {
+                                   @RequestHeader(value = "sellerId") Long sellerId) {
         return orderService.findById(orderId, sellerId);
     }
 
