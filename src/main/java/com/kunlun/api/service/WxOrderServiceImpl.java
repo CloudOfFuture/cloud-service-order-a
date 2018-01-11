@@ -71,6 +71,10 @@ public class WxOrderServiceImpl implements WxOrderService {
      */
     @Override
     public DataRet<String> applyRefund(Long orderId) {
+        Order order = wxOrderMapper.findById(orderId);
+        if (!order.getOrderStatus().equals(CommonEnum.UN_DELIVERY.getCode())) {
+            return new DataRet<>("ERROR", "订单状态不对");
+        }
         int result = wxOrderMapper.applyRefund(orderId);
         if (result > 0) {
             return new DataRet<>("申请退款成功");
