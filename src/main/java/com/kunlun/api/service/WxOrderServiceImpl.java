@@ -97,8 +97,8 @@ public class WxOrderServiceImpl implements WxOrderService {
         if (orderExt == null) {
             return new DataRet<>("ERROR", "订单不存在");
         }
-        DataRet deliveryRet = deliveryClient.findDetailById(orderExt.getDeliveryId());
-        orderExt.setDelivery((Delivery) deliveryRet.getBody());
+        DataRet<Delivery> deliveryRet = deliveryClient.findById(orderExt.getDeliveryId());
+        orderExt.setDelivery(deliveryRet.getBody());
         return new DataRet<>(orderExt);
     }
 
