@@ -118,22 +118,22 @@ public interface OrderMapper {
     /**
      * 根据id查询详情
      *
-     * @param id
+     * @param orderId
      * @return
      */
-    Order findById(@Param("id") Long id);
+    Order findById(@Param("orderId") Long orderId);
 
     /**
      * 退款审核
      *
      * @param orderId
      * @param orderStatus
-     * @param refundFree
+     * @param refundFee
      * @param remark
      * @return int
      */
     int auditRefund(@Param("orderId") Long orderId,
                     @Param("orderStatus") String orderStatus,
-                    @Param("refundFree") Integer refundFree,
+                    @Param("refundFee") Integer refundFee,
                     @Param("remark") String remark);
 }

@@ -126,7 +126,7 @@
         remark=#{remark},
         refund_fee=#{refundFee},
         update_date=NOW()
-        WHERE id=#{orderId} AND seller_id=#{sellerId}
+        WHERE id=#{orderId}
     </update>
 
     <!--修改订单状态-->
@@ -151,4 +151,49 @@
         update_date = NOW()
         WHERE id=#{id}
     </update>
+
+    <select id="findById" resultType="com.kunlun.entity.Order">
+        SELECT id,
+        seller_id,
+        user_id,
+        order_no,
+        good_snapshot_id,
+        delivery_no,
+        delivery_id,
+        order_status,
+        order_type,
+        pay_type,
+        message,
+        recipients,
+        phone,
+        province,
+        city,
+        area,
+        address,
+        post_code,
+        good_name,
+        count,
+        wx_order_no,
+        create_date,
+        pay_date,
+        delivery_date,
+        good_id,
+        use_ticket,
+        ticket_id,
+        prepay_id,
+        remark,
+        refund_date,
+        update_date,
+        freight_fee,
+        good_fee,
+        payment_fee,
+        reduce_fee,
+        order_fee,
+        refund_fee,
+        send_good_id,
+        operate_point,
+        use_point
+        FROM t_order where id=#{orderId}
+    </select>
+
 </mapper>
