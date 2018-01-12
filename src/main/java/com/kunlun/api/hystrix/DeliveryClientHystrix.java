@@ -16,11 +16,12 @@ public class DeliveryClientHystrix implements DeliveryClient {
     /**
      * 查询订单收货地址
      *
-     * @param deliveryId
+     * @param id
      * @return
      */
     @Override
-    public DataRet findDetailById(Long deliveryId) {
-        return new DataRet("ERROR", "查询订单收货地址失败");
+    public DataRet<Delivery> findById(Long id) {
+        return new DataRet<>("ERROR", "查询订单收货地址失败");
     }
 }
+
