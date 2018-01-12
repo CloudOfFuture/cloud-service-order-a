@@ -64,6 +64,7 @@ public interface WxOrderService {
 
     /**
      * 新增订单
+     *
      * @param order
      * @return
      */
@@ -71,25 +72,27 @@ public interface WxOrderService {
 
     /**
      * 修改订单预付款订单号
+     *
      * @param id
      * @param prepayId
      * @return
      */
-    DataRet<String> updateOrderPrepayId(Long id,String prepayId);
+    DataRet<String> updateOrderPrepayId(Long id, String prepayId);
 
 
     /**
-     * 查询未支付订单
+     * 查询未付款订单列表
      *
      * @return List<Order>
      */
-    DataRet<List<Order>> findUnPayOrder();
+    DataRet<List<Order>> findUnPayOrder(String orderStatus);
 
     /**
-     * 未退款订单列表
+     * 查询退款中的订单列表
      *
-     * @return List<Order>
+     * @param orderStatus
+     * @return
      */
-    DataRet<List<Order>> findRefundingOrder();
+    DataRet<List<Order>> findRefundingOrder(String orderStatus);
 
 }

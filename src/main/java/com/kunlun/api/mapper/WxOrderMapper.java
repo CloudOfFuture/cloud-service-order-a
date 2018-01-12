@@ -72,12 +72,18 @@ public interface WxOrderMapper {
     int updatePrepayId(@Param("id") Long id, @Param("prepayId") String prepayId);
 
     /**
-     * 查询退款中的订单
+     * 查询退款中的订单列表
      *
+     * @param orderStatus
      * @return
      */
-    List<Order> findRefundingOrder();
+    List<Order> findRefundingOrder(@Param("orderStatus") String orderStatus);
 
-
-    List<Order> findUnPayOrder();
+    /**
+     * 查询未付款订单列表
+     *
+     * @param orderStatus
+     * @return
+     */
+    List<Order> findUnPayOrder(@Param("orderStatus") String orderStatus);
 }

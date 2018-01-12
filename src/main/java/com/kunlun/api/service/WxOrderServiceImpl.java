@@ -97,8 +97,10 @@ public class WxOrderServiceImpl implements WxOrderService {
         if (orderExt == null) {
             return new DataRet<>("ERROR", "订单不存在");
         }
+        //订单收货地址
         DataRet<Delivery> deliveryRet = deliveryClient.findById(orderExt.getDeliveryId());
         orderExt.setDelivery(deliveryRet.getBody());
+        //TODO 订单发货信息
         return new DataRet<>(orderExt);
     }
 
@@ -192,25 +194,43 @@ public class WxOrderServiceImpl implements WxOrderService {
         return new DataRet<>("ERROR", "修改预付款订单号失败");
     }
 
-
+    /**
+     * 查询未付款订单列表
+     *
+     * @param orderStatus
+     * @return
+     */
     @Override
-    public DataRet<List<Order>> findUnPayOrder() {
-        List<Order> result = wxOrderMapper.findUnPayOrder();
+    public DataRet<List<Order>> findUnPayOrder(String orderStatus) {
+        List<Order> result = wxOrderMapper.findUnPayOrder(orderStatus);
         if (result == null || result.size() == 0) {
             return new DataRet<>("ERROR", "暂无数据");
         }
         return new DataRet<>(result);
     }
 
+    /**
+     * 查询退款中的订单列表
+     *
+     * @param orderStatus
+     * @return
+     */
     @Override
-    public DataRet<List<Order>> findRefundingOrder() {
-        List<Order> result = wxOrderMapper.findRefundingOrder();
+    public DataRet<List<Order>> findRefundingOrder(String orderStatus) {
+        List<Order> result = wxOrderMapper.findRefundingOrder(orderStatus);
         if (result == null || result.size() == 0) {
             return new DataRet<>("ERROR", "暂无数据");
         }
         return new DataRet<>(result);
     }
 
+    /**
+     * 保存订单日志
+     *
+     * @param orderId
+     * @param orderNo
+     * @param action
+     */
     private void saveOrderLog(Long orderId, String orderNo, String action) {
         OrderLog orderLog = CommonUtil.constructOrderLog(orderNo,
                 action, null, orderId);
